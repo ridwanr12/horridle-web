@@ -10,16 +10,15 @@ const RiddleDetails = () => {
   const [data, setData] = useState(null);
   const [isPending, setIsPending] = useState(true);
   const [error, setError] = useState(null);
-
+  // console.log("id riddle", id_riddle);
   useEffect(() => {
     axios
-      .post("http://localhost:3000/get-detail-riddle/")
-      .then((res) => {
-        console.log(res);
-        // setData(res.data);
+      .post("http://localhost:3000/get-detail-riddle/", {
+        id_riddle: id_riddle,
       })
-      .then((data) => {
-        setData(data.values);
+      .then((res) => {
+        // console.log("isi res: \n", res);
+        setData(res.data.values);
         setIsPending(false);
         setError(null);
       })
@@ -27,6 +26,7 @@ const RiddleDetails = () => {
         console.log(err);
       });
   });
+  // console.log(data);
   const history = useHistory();
 
   const handleDelete = () => {
@@ -41,16 +41,22 @@ const RiddleDetails = () => {
     history.push("/");
   };
   // console.log(body);
-  console.log(data);
+  // console.log(id_riddle);
+  // console.log(data);
+  // console.log(data[0].values);
+  
   return (
-    <div className="riddle-details" key={data.id_riddle}>
+    <div className="horridle-details" key={id_riddle}>
       {isPending && <div>Loading ....</div>}
       {error && <div>{error}</div>}
       {data && (
         <article>
-          <h2>{data.title}</h2>
-          <p>Writter by {data.id_user_author} </p>
-          <div>{data.riddle_text} </div>
+          <h1 className="title">{data[0].title}</h1>
+          <br />
+          <h2>Penulis dengan id : {data[0].id_user_author}</h2>
+          <p>Writter by {data[0].id_user_author} </p>
+          <div>{data[0].riddle_text} </div>
+          <div>{data[0].riddle_text} </div>
           <button onClick={handleClick}>Back</button>
           <br />
           <button onClick={handleDelete}>Delete</button>
