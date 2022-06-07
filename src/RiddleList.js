@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 
 const RiddleList = ({ values }) => {
+  // console.log(values);
   return (
     <div className="values-list">
       {values?.map((values) => (
@@ -12,7 +13,7 @@ const RiddleList = ({ values }) => {
             <br />
             <p>
               <i>
-                Written by <span>{values.id_user_author}</span>
+                Written by <span>{values.name}</span>
               </i>
             </p>
           </Link>

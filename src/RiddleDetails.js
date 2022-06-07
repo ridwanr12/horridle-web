@@ -43,7 +43,8 @@ const RiddleDetails = () => {
   // console.log(id_riddle);
   // console.log(data);
   // console.log(data[0].values);
-  
+
+  // console.log(data[0]);
   // console.log(data[0]);
   return (
     <div className="apa" key={id_riddle}>
@@ -54,13 +55,18 @@ const RiddleDetails = () => {
         <article className="horridle-details">
           <h1 className="title">{data[0].title}</h1>
           <br />
-          <h2>Penulis dengan id : {data[0].id_user_author}</h2>
-          <p>Created at {data[0].date} </p>
-          <div>{data[0].riddle_text} </div>
-          <div>{data[0].riddle_text} </div>
-          <button onClick={handleClick}>Back</button>
+          <div className="profile">
+            <img src={data[0].img_profile} className="circular_image" /><h2>{data[0].name}</h2>
+          </div>
+          <p>Created at {data[0].date}</p>
           <br />
-          <button onClick={handleDelete}>Delete</button>
+          <p>{data[0].riddle_text}</p>
+          <br />
+          <p className="answer-detail">Answer : {data[0].riddle_answer}</p>
+
+          {/* <button onClick={handleClick}>Back</button> */}
+          {/* <br /> */}
+          {/* <button onClick={handleDelete}>Delete</button> */}
         </article>
       )}
     </div>
