@@ -1,0 +1,204 @@
+@import url("https://fonts.googleapis.com/css?family=Inter");
+@import url("https://fonts.googleapis.com/css?family=IM Fell French Canon SC");
+
+/* base styles */
+* {
+  margin: 0;
+  font-family: "Inter";
+  color: #333;
+}
+
+.navbar {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  /* max-width: 600px; */
+  margin: 0 auto;
+  /* border-bottom: 1px solid #630000; */
+  background-image: url('navbar.png');
+  background-color: #630000;
+  position: sticky;
+  top: 0;
+  color: #EEEBDD;
+  font-size: larger;
+}
+
+.navbar h1 {
+  font-family: "IM Fell French Canon SC";
+  color: #EEEBDD;
+  font-weight: lighter;
+  border-bottom: 1px solid #EEEBDD;
+  border-top: 1px solid #EEEBDD;
+}
+
+.navbar .links {
+  margin-left: auto;
+}
+
+.navbar a {
+  margin-left: 16px;
+  text-decoration: none;
+  padding: 6px;
+  color: #EEEBDD;
+  background-color: #630000;
+  color: #EEEBDD;
+  border: 0;
+  border-radius: 40px;
+  width: 150px;
+  height: 60px;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 88px;
+}
+
+.navbar a:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+  /* color: rgb(207, 207, 207); */
+}
+
+.content {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+/* Riddle preview / lists */
+.horridle-preview {
+  padding: 10px 16px;
+  margin: 20px 60px;
+  /* margin: 20px 0; */
+  /* border-bottom: 1px solid #fafafa; */
+  background: #EEEBDD;
+  border: 5px solid #630000;
+  border-radius: 20px;
+}
+
+.horridle-preview:hover {
+  background-color: #dddddd;
+  box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.1);
+}
+
+.horridle-preview h2 {
+  max-width: fit-content;
+  padding: 5px 20px;
+  background-color: #630000;
+  border-radius: 50px;
+  margin-top: 0px;
+  margin-right: auto;
+  margin-left: auto;
+  color: #EEEBDD;
+  font-size: 20px;
+  text-align: center;
+}
+
+.horridle-preview a {
+  text-decoration: none;
+}
+
+.horridle-preview span {
+  font-weight: bolder;
+}
+
+.riddle-body{
+  /* width: 100%; */
+  height: 60px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+/* Plus create in horridle list */
+.plus-create {
+  position: fixed;
+  right: 15px;
+  bottom: 20px;
+  font-size: 44px;
+  text-decoration: none;
+  background-color: #630000;
+  /* padding: 10px; */
+  border-radius: 50px;
+  width: 58px;
+  height: 58px;
+  text-align: center;
+  box-shadow: rgba(0, 0, 0, 0.25);
+}
+
+.plus-create a {
+  color: #EEEBDD;
+  text-decoration: none;
+}
+
+/* Riddle details page */
+.horridle-details h2 {
+  font-size: 20px;
+  color: #f1356d;
+  margin-bottom: 10px;
+}
+
+.horridle-details div {
+  margin: 20px 0;
+}
+
+.horridle-details button {
+  background: #f1356d;
+  color: #fff;
+  border: 0;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+
+/* create new horridle form */
+.create {
+  background-color: #630000;
+  border-radius: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 50px;
+}
+
+.create h2 {
+  font-size: 20px;
+  color: #EEEBDD;
+  margin-bottom: 30px;
+}
+
+.create label {
+  color: #EEEBDD;
+  text-align: left;
+  display: block;
+}
+
+.create input,
+.create textarea {
+  width: 100%;
+  padding: 10px 10px;
+  margin: 10px 0;
+  border: 2px solid #630000;
+  border-radius: 20px;
+  box-sizing: border-box;
+  display: block;
+  font-size: large;
+}
+
+.create-button {
+  /* background: #EEEBDD; */
+  color: #630000;
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  max-width: fit-content;
+  margin: 0 auto;
+  /* margin-right: auto;
+  margin-left: auto; */
+}
+
+.create-button button{
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: #EEEBDD;
+  color: #630000;
+  padding: 8px;
+  border-radius: 8px;
+}
