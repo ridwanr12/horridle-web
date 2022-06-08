@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 const RiddleList = ({ values }) => {
-  // console.log(values);
+  console.log(values);
   return (
     <div className="values-list">
       {values?.map((values) => (
