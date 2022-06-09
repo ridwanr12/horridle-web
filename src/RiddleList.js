@@ -15,7 +15,7 @@ const RiddleList = ({ values }) => {
               <i>
                 Written by <span>{values.name}</span>
               </i>
-            </p>
+            </p><br />
           </Link>
         </div>
       ))}

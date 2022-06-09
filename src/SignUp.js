@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 
-const Create = () => {
+const SignUp = () => {
   const history = useHistory();
   const [title, setTitle] = useState("");
   const [riddle_text, setBody] = useState("");
@@ -37,39 +37,42 @@ const Create = () => {
   };
 
   return (
-    <div className="create">
-      <h2>CREATE NEW RIDDLE</h2>
+    <div className="sign-up">
+      <h1>SIGN UP</h1>
       <form onSubmit={handleSubmit}>
-        <label>Title: </label>
         <input
           type="text"
           required
+          placeholder="Name"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
-
-        <label>Riddle: </label>
-        <textarea
-          required
-          value={riddle_text}
-          onChange={(e) => setBody(e.target.value)}
-        />
-
-        <label>Answer: </label>
+        <br />
         <input
           type="text"
           required
+          placeholder="Email"
+          value={riddle_text}
+          onChange={(e) => setBody(e.target.value)}
+        />
+        <br />
+        <input
+          type="password"
+          required
+          placeholder="Password"
           value={answer}
           onChange={(e) => setAnswer(e.target.value)}
-        />
-        <div className="create-button">
-          {!isPending && <button>UPLOAD</button>}
-          {isPending && <button disabled>UPLOADING....</button>}
-          <button onClick={handleCancle}>CANCLE</button>
+        w/>
+        Sudah punya akun?
+        <br />
+        <div className="sign-up-button">
+          {!isPending && <button>CREATE ACCOUNT</button>}
+          {isPending && <button disabled>CREATING...</button>}
+          <button onClick={handleCancle}>LOGIN</button>
         </div>
       </form>
     </div>
   );
 };
 
-export default Create;
+export default SignUp;

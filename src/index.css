@@ -3,13 +3,17 @@
 
 /* base styles */
 * {
-  margin: 0;
+  margin: 0px;
   font-family: "Inter";
   color: #333;
 }
 
 body {
+  /* top: 0; */
   background-color: #eee;
+  /* background-image: url('navbar.png'); */
+  /* background-repeat:repeat-y; */
+  /* background-position:top; */
 }
 
 .navbar {
@@ -17,7 +21,6 @@ body {
   display: flex;
   align-items: center;
   margin: 0 auto;
-  background-image: url('navbar.png');
   background-color: #630000;
   position: sticky;
   top: 0;
@@ -63,12 +66,66 @@ body {
   padding: 5px;
 }
 
+/*  */
+/* sign-up new horridle form */
+.sign-up {
+  font: "IM Fell French Canon SC";
+  background-color: #630000;
+  border-radius: 20px;
+  max-width: 1000px;
+  /* height: ; */
+  margin: 0 auto;
+  text-align: center;
+  padding: 150px 50px;
+}
+
+.sign-up h1 {
+  font: "IM Fell French Canon SC";
+  font-size: 20px;
+  color: #EEEBDD;
+  margin-bottom: 30px;
+}
+
+.sign-up input {
+  background: #00000000;
+  border-bottom: 2px solid #EEEBDD;
+  width: 100%;
+  padding: 10px 10px;
+  margin: 10px 0;
+  /* border: 2px solid #630000; */
+  /* border-radius: 20px; */
+  box-sizing: border-box;
+  display: block;
+  font-size: large;
+}
+
+.sign-up-button {
+  color: #630000;
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  max-width: fit-content;
+  margin: 0 auto;
+  /* margin: 5px; */
+}
+
+.sign-up-button button {
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: #EEEBDD;
+  color: #630000;
+  padding: 8px;
+  border-radius: 8px;
+}
+
+
 /* Riddle preview / lists */
 .horridle-preview {
-  padding: 10px 16px;
+  padding: 0px 16px;
   margin: 20px 40px;
   background: #EEEBDD;
-  border: 5px solid #630000;
+  border: 3px solid #630000;
   border-radius: 20px;
 }
 
@@ -129,13 +186,14 @@ body {
   border: 2px solid #630000;
   border-radius: 20px;
   padding: 0 20px;
-  height: 600px;
+  height: 680px;
   text-overflow: ellipsis;
   overflow: auto;
 
 }
 
-.horridle-details h1 {
+/* .horridle-details h1 { */
+.title {
   max-width: fit-content;
   padding: 5px 20px;
   background-color: #630000;
@@ -159,6 +217,15 @@ body {
 }
 
 .horridle-details button {
+  background: #630000;
+  color: #fff;
+  border: 0;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.delete-riddle button {
   background: #630000;
   color: #fff;
   border: 0;
@@ -294,6 +361,19 @@ body {
   height: auto;
 }
 
+/* Box Comment */
+.commenting input[type=text], select {
+  width: 100%;
+  height: 50px;
+  padding: 12px 20px;
+  /* margin: 0px 0; */
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  box-sizing: border-box;
+}
+
+
 /* Riddle preview / lists */
 .comments {
   border: 1px solid #C4C4C4;
@@ -343,10 +423,12 @@ body {
 
 .left {
   width: 70%;
+  /* background-color: #EEEBDD; */
   /* margin: 5px; */
 }
 
 .right {
+  /* background-color: #fff; */
   width: 25%;
   margin: 5px 0;
   border: 2px solid #630000;
@@ -355,7 +437,6 @@ body {
   height: 670px;
   text-overflow: ellipsis;
   overflow: auto;
-
 }
 
 /* Clear floats after the columns */
@@ -376,9 +457,9 @@ body {
   }
 
   .right {
-    margin-left: auto;
-    margin-right: auto;
-    width: 400px;
+    margin: 0 8px;
+    /* margin-right: auto; */
+    width: 98%;
   }
 }
 
