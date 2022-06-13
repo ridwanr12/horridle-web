@@ -1,14 +1,52 @@
-import RiddleList from "./RiddleList";
-import useFetch from "./useFetch";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 const Home = () => {
-  const {error, isPending, data: values,} = useFetch("http://localhost:3000/get-all-riddle");
+
+  const [user, setUser] = useState(8);
+
+  const [data, setData] = useState(null);
+
+  const [isPending, setIsPending] = useState(true);
+  const [error, setError] = useState(null);
+
+  const riddlesAPI = "http://localhost:3000/get-all-riddle";
+
+  useEffect(() => {
+    axios.post(riddlesAPI).then((res) => {
+      // console.log(res);
+      setData(res.data.values);
+      setIsPending(false);
+      setError(null);
+    });
+  });
   // console.log("test home");
   return (
-    <div className="home">
+    <div className="values-list">
+      {isPending && <div>Loading ....</div>}
       {error && <div>{error}</div>}
-      {isPending && <div>Loading...</div>}
-      {values && <RiddleList values={values} />}
+      {data?.map((values) => (
+        <div className="horridle-preview" key={values.id_riddle}>
+          <Link to={`/get-detail-riddle/${values.id_riddle}`}>
+            <h2>{values.title}</h2>
+            <br />
+            <p className="riddle-body">{values.riddle_text}</p>
+            <br />
+            <p>
+              <i>
+                Written by <span>{values.name}</span>
+              </i>
+            </p>
+            <br />
+          </Link>
+        </div>
+      ))}
+      <div className="plus-create">
+        <Link to="/create" className="plus-create">
+          +
+        </Link>
+      </div>
     </div>
   );
 };

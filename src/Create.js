@@ -32,7 +32,7 @@ const Create = () => {
       });
   };
 
-  const handleCancle = () => {
+  const handleCancel = () => {
     history.push("/");
   };
 
@@ -65,7 +65,7 @@ const Create = () => {
         <div className="create-button">
           {!isPending && <button>UPLOAD</button>}
           {isPending && <button disabled>UPLOADING....</button>}
-          <button onClick={handleCancle}>CANCLE</button>
+          <button onClick={handleCancel}className='cancel-create'>CANCEL</button>
         </div>
       </form>
     </div>

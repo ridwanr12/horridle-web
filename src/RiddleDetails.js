@@ -18,17 +18,16 @@ const RiddleDetails = () => {
   const [error, setError] = useState(null);
 
   const [show, setShow] = useState(false);
-  const [jawab, setJawab] = useState("");
-  const [edit, setEdit] = useState(false);
+  const [commentInput, setCommentInput] = useState("");
+  const [del, setDel] = useState(false);
 
   const detailAPI = "http://localhost:3000/get-detail-riddle/";
-  const commentsAPI = "http://localhost:3000/get-riddle-comments/";
+  const allCommentsAPI = "http://localhost:3000/get-riddle-comments/";
   const allAPI = "http://localhost:3000/get-all-riddle/";
-  // setUser(8);
 
   useEffect(() => {
     const req1 = axios.post(detailAPI, { id_riddle: id_riddle });
-    const req2 = axios.post(commentsAPI, { id_riddle: id_riddle });
+    const req2 = axios.post(allCommentsAPI, { id_riddle: id_riddle });
     const req3 = axios.post(allAPI, { id_riddle: id_riddle });
     axios.all([req1, req2, req3]).then(
       axios.spread((...res) => {
@@ -40,10 +39,10 @@ const RiddleDetails = () => {
         setError(null);
         if (user === data.id_user) {
           console.log("bener");
-          setEdit(true);
+          setDel(true);
         } else {
           console.log("bukan pemilik riddle");
-          setEdit(false);
+          setDel(false);
         }
       })
     );
@@ -57,10 +56,29 @@ const RiddleDetails = () => {
   const handleEnter = (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
-      console.log(jawab);
+      console.log(commentInput);
       setShow(true);
-      // history.push("");
     }
+  };
+
+  const handleComment = (e) => {
+    e.preventDefault();
+
+    setIsPending(true);
+
+    axios
+      .post("localhost:3000/comment-riddle", {
+        id_riddle: id_riddle,
+        id_user: user,
+        comment: commentInput,
+      })
+      .then((res) => {
+        console.log("res");
+        console.log(res);
+        console.log("new riddle added");
+        setIsPending(false);
+        history.push("/");
+      });
   };
 
   const handleDelete = () => {
@@ -75,7 +93,7 @@ const RiddleDetails = () => {
   };
 
   // console.log(data);
-  // console.log(comments);
+  // console.log(allComments);
   return (
     <div className="page-detail">
       <button onClick={handleClick} className="back-arrow"></button>
@@ -86,7 +104,7 @@ const RiddleDetails = () => {
           {data && (
             <article>
               <h1 className="title">{data.title}</h1>
-              {edit && (
+              {del && (
                 <div className="delete-riddle">
                   <button onClick={handleDelete}>Delete</button>
                 </div>
@@ -104,21 +122,26 @@ const RiddleDetails = () => {
               {show && (
                 <p className="answer-detail">Answer : {data.riddle_answer}</p>
               )}
+              {del && (
+                <p className="answer-detail">Answer : {data.riddle_answer}</p>
+              )}
             </article>
           )}
-          <div className="commenting">
-            <form action=""></form>
-            <input
-              type="text"
-              id="jawab"
-              name="jawaban"
-              placeholder="Tambahkan Jawaban..."
-              onKeyDown={handleEnter}
-              required
-              value={jawab}
-              onChange={(e) => setJawab(e.target.value)}
-            />
-          </div>
+          {!del && (
+            <div className="commenting">
+              <form action=""></form>
+              <input
+                type="text"
+                id="commentInput"
+                name="commentInput"
+                placeholder="Tambahkan Jawaban..."
+                onKeyDown={handleEnter}
+                required
+                value={commentInput}
+                onChange={(e) => setCommentInput(e.target.value)}
+              />
+            </div>
+          )}
           {comments?.map((comments) => (
             // <div className="comments" key={comments.id_riddle}>
             <div className="comments" key={comments.id_comment}>

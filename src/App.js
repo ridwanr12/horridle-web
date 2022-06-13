@@ -5,6 +5,8 @@ import Create from "./Create";
 import RiddleDetails from "./RiddleDetails";
 import NotFound from "./NotFound";
 import SignUp from "./SignUp";
+import SignIn from "./SignIn";
+import UserProfile from "./UserProfile";
 
 function App() {
   return (
@@ -21,6 +23,12 @@ function App() {
             </Route>
             <Route path="/sign-up">
               <SignUp />
+            </Route>
+            <Route path="/sign-in">
+              <SignIn />
+            </Route>
+            <Route path="/user-profile">
+              <UserProfile />
             </Route>
             <Route path="/get-detail-riddle/:id_riddle">
               <RiddleDetails />
