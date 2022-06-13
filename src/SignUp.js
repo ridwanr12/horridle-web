@@ -13,7 +13,10 @@ const SignUp = () => {
   );
   const [isPending, setIsPending] = useState(false);
 
-  const registerAPI = "localhost:3000/auth//api/v1/register";
+  const [eye, seteye] = useState(true);
+  const [password, setpassword] = useState("password");
+
+  const registerAPI = "http://localhost:3000/auth//api/v1/register";
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -21,7 +24,7 @@ const SignUp = () => {
     setIsPending(true);
 
     axios
-      .post("localhost:3000/auth//api/v1/register", {
+      .post(registerAPI, {
         img_profile: img_profile,
         name: nama,
         email: email,
@@ -41,8 +44,14 @@ const SignUp = () => {
     history.push("/");
   };
 
-  const handleLogin = () => {
-    history.push("/sign-in");
+  const Eye = () => {
+    if (password == "password") {
+      setpassword("text");
+      seteye(false);
+    } else {
+      setpassword("password");
+      seteye(true);
+    }
   };
 
   return (
@@ -56,7 +65,7 @@ const SignUp = () => {
           value={nama}
           onChange={(e) => setNama(e.target.value)}
         />
-        <br />
+        <br /><br />
         <input
           type="text"
           required
@@ -65,17 +74,22 @@ const SignUp = () => {
           onChange={(e) => setEmail(e.target.value)}
         />
         <br />
-        <input
-          type="password"
-          required
-          placeholder="Password"
-          value={passwordInput}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+        <div className="input-password">
+          <i
+            onClick={Eye}
+            className={`fa ${eye ? "fa-eye-slash" : "fa-eye"}`}
+          ></i>
+          <input
+            type={password}
+            required
+            placeholder="Password"
+            value={passwordInput}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
         <p>
           Already have account? <a href="/sign-in">LOGIN</a>
         </p>
-        <a href="/sign-in"></a>
         <div className="sign-up-button">
           {!isPending && <button>REGISTER</button>}
           {isPending && <button disabled>CREATING...</button>}

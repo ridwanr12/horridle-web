@@ -8,6 +8,9 @@ const SignIn = () => {
   const [passwordInput, setPassword] = useState("");
   const [isPending, setIsPending] = useState(false);
 
+  const [eye, seteye] = useState(true);
+  const [password, setpassword] = useState("password");
+
   // const registerAPI = "localhost:3000/auth//api/v1/register";
 
   const handleSubmit = (e) => {
@@ -31,6 +34,20 @@ const SignIn = () => {
     history.push("/");
   };
 
+  // const handlePassword = () => {
+  //   history.push("/");
+  // };
+
+  const Eye = () => {
+    if (password == "password") {
+      setpassword("text");
+      seteye(false);
+    } else {
+      setpassword("password");
+      seteye(true);
+    }
+  };
+
   return (
     <div className="sign-in">
       <h1>SIGN IN</h1>
@@ -43,15 +60,21 @@ const SignIn = () => {
           onChange={(e) => setEmail(e.target.value)}
         />
         <br />
-        <input
-          type="password"
-          required
-          placeholder="Password"
-          value={passwordInput}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+        <div className="input-password">
+          <i
+            onClick={Eye}
+            className={`fa ${eye ? "fa-eye-slash" : "fa-eye"}`}
+          ></i>
+          <input
+            type={password}
+            required
+            placeholder="Password"
+            value={passwordInput}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
         <p>
-          Don't have any account? <a href="/sign-in">SIGN UP</a>
+          Don't have any account? <a href="/sign-up">SIGN UP</a>
         </p>
         <div className="sign-in-button">
           {!isPending && <button>LOGIN</button>}

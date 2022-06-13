@@ -11,7 +11,7 @@
 
 body {
   /* top: 0; */
-  background-color: #eee;
+  background-color: #fafafa;
   /* background-image: url('navbar.png'); */
   /* background-repeat:repeat-y; */
   /* background-position:top; */
@@ -77,7 +77,7 @@ body {
   font-family: "IM Fell French Canon SC";
   background-color: #630000;
   border-radius: 40px;
-  max-width: 1000px;
+  max-width: 800px;
   /* height: ; */
   margin: 0 auto;
   text-align: center;
@@ -146,6 +146,24 @@ body {
 .sign-in-button .cancel-login,
 .sign-up-button .cancel-regist {
   background-color: #ff6060;
+}
+
+.sign-in .fa,
+.sign-up .fa {
+  margin-left: 95%;
+  position: relative;
+  top: 42px;
+  /* margin-top: 0%; */
+  /* margin-right: 10%; */
+  /* position:absolute;
+  left: auto;
+  right: 30px; */
+  /* top: 44px; */
+  font-size: 20px;
+  cursor: pointer;
+  /* font-size: large; */
+  cursor: pointer;
+  color: #EEEBDD;
 }
 
 /* Riddle preview / lists */
@@ -537,37 +555,94 @@ select {
   height: auto;
 }
 
-.userProfile{
-  margin: 20px;
+.userProfile {
+  /* background-color: #63000030; */
+  margin: 10px;
+  padding: 80px 20px;
+  border: 1px solid #630000;
+  border-radius: 24px;
 }
 
-.userProfile .links{
-  margin-left: auto;
-}
-/* .navbar {
-  padding: 20px;
-  display: flex;
-  align-items: center;
-  margin: 0 auto;
-  background-color: #630000;
-  position: sticky;
-  top: 0;
-  color: #EEEBDD;
-  font-size: larger;
-}
-
-.dropdown {
-  margin: 5px;
-}
-
-.navbar h1 {
-  font-family: "IM Fell French Canon SC";
-  color: #EEEBDD;
-  font-weight: lighter;
-  border-bottom: 1px solid #EEEBDD;
-  border-top: 1px solid #EEEBDD;
-}
-
-.navbar .links {
-  margin-left: auto;
+/* .userProfile h1{
+  font-size: 100px;
 } */
+
+.posts {
+  display: flex;
+  align-items: left;
+}
+
+.posts a {
+  text-decoration: none;
+}
+
+.posts .links {
+  margin-left: auto;
+  text-decoration: none;
+  /* margin: 0 auto; */
+}
+
+.user-riddle {
+  display: flex;
+  align-items: left;
+  text-overflow: ellipsis;
+  overflow: auto;
+  /* width: 200px; */
+  /* height: 300px; */
+}
+
+.userRiddle {
+  min-width: 160px;
+  width: 240px;
+  height: 400px;
+  padding: 0px 16px;
+  margin: 10px 10px;
+  border: 2px solid #630000;
+  border-radius: 20px;
+}
+
+.userRiddle h2 {
+  font-size: 16px;
+  max-width: fit-content;
+  padding: 5px 20px;
+  background-color: #630000;
+  border-radius: 50px;
+  margin-top: 0px;
+  margin-right: auto;
+  margin-left: auto;
+  color: #EEEBDD;
+  text-align: center;
+}
+
+.userRiddle:hover {
+  background-color: #e3e3e3;
+  box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.1);
+}
+
+
+.userRiddle a {
+  text-decoration: none;
+}
+
+.userRiddle span {
+  font-weight: bolder;
+}
+
+.userRiddle p {
+  font-size: 16px;
+}
+
+.user-riddle .user-riddle-body {
+  height: 140px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.user-riddle .riddle-answer {
+  background-color: #EEEBDD;
+  border-radius: 20px;
+  padding: 10px;
+  height: 110px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
