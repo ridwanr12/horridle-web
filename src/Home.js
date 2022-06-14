@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import Navbar from "./Navbar";
 
 const Home = () => {
-
-  const [user, setUser] = useState(8);
+  // const [user, setUser] = useState(8);
 
   const [data, setData] = useState(null);
 
@@ -21,31 +21,35 @@ const Home = () => {
       setError(null);
     });
   });
-  // console.log("test home");
   return (
-    <div className="values-list">
-      {isPending && <div>Loading ....</div>}
-      {error && <div>{error}</div>}
-      {data?.map((values) => (
-        <div className="horridle-preview" key={values.id_riddle}>
-          <Link to={`/get-detail-riddle/${values.id_riddle}`}>
-            <h2>{values.title}</h2>
-            <br />
-            <p className="riddle-body">{values.riddle_text}</p>
-            <br />
-            <p>
-              <i>
-                Written by <span>{values.name}</span>
-              </i>
-            </p>
-            <br />
+    <div className="body-content">
+      <Navbar />
+      <br />
+      <br />
+      <div className="values-list">
+        {isPending && <div>Loading ....</div>}
+        {error && <div>{error}</div>}
+        {data?.map((values) => (
+          <div className="horridle-preview" key={values.id_riddle}>
+            <Link to={`/get-detail-riddle/${values.id_riddle}`}>
+              <h2>{values.title}</h2>
+              <br />
+              <p className="riddle-body">{values.riddle_text}</p>
+              <br />
+              <p>
+                <i>
+                  Written by <span>{values.name}</span>
+                </i>
+              </p>
+              <br />
+            </Link>
+          </div>
+        ))}
+        <div className="plus-create">
+          <Link to="/create" className="plus-create">
+            +
           </Link>
         </div>
-      ))}
-      <div className="plus-create">
-        <Link to="/create" className="plus-create">
-          +
-        </Link>
       </div>
     </div>
   );

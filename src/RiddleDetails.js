@@ -3,12 +3,14 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import Navbar from "./Navbar";
 
 const RiddleDetails = () => {
   const history = useHistory();
   const { id_riddle } = useParams();
 
-  const [user, setUser] = useState(8);
+  // const [user, setUser] = useState(8);
+  const user = localStorage.getItem("user id");
 
   const [data, setData] = useState(null);
   const [comments, setComments] = useState(null);
@@ -37,6 +39,7 @@ const RiddleDetails = () => {
         setRiddle(res[2].data.values);
         setIsPending(false);
         setError(null);
+        // console.log(data);
         if (user === data.id_user) {
           console.log("bener");
           setDel(true);
@@ -95,85 +98,93 @@ const RiddleDetails = () => {
   // console.log(data);
   // console.log(allComments);
   return (
-    <div className="page-detail">
-      <button onClick={handleClick} className="back-arrow"></button>
-      {isPending && <div>Loading ....</div>}
-      {error && <div>{error}</div>}
-      <div className="column left">
-        <div className="horridle-details">
-          {data && (
-            <article>
-              <h1 className="title">{data.title}</h1>
-              {del && (
-                <div className="delete-riddle">
-                  <button onClick={handleDelete}>Delete</button>
+    <div className="body-content">
+      <Navbar />
+      <br />
+      <br />
+      <div className="page-detail">
+        <button onClick={handleClick} className="back-arrow"></button>
+        {isPending && <div>Loading ....</div>}
+        {error && <div>{error}</div>}
+        <div className="column left">
+          <div className="horridle-details">
+            {data && (
+              <article>
+                <h1 className="title">{data.title}</h1>
+                {del && (
+                  <div className="delete-riddle">
+                    <button onClick={handleDelete}>Delete</button>
+                  </div>
+                )}
+                <div className="profile">
+                  <img src={data.img_profile} className="circular_image" />
+                  <h2>{data.name}</h2>
                 </div>
-              )}
-              <div className="profile">
-                <img src={data.img_profile} className="circular_image" />
-                <h2>{data.name}</h2>
+                <p>Created at {data.date}</p>
+                <br />
+                <p>{data.riddle_text}</p>
+                <br />
+                Komen trus enter buat munculin answer tp ms bug jg si wkwkwk
+                <br />
+                {show && (
+                  <p className="answer-detail">Answer : {data.riddle_answer}</p>
+                )}
+                {del && (
+                  <p className="answer-detail">Answer : {data.riddle_answer}</p>
+                )}
+              </article>
+            )}
+            {!del && (
+              <div className="commenting">
+                <form action=""></form>
+                <input
+                  type="text"
+                  id="commentInput"
+                  name="commentInput"
+                  placeholder="Tambahkan Jawaban..."
+                  onKeyDown={handleEnter}
+                  required
+                  value={commentInput}
+                  onChange={(e) => setCommentInput(e.target.value)}
+                />
               </div>
-              <p>Created at {data.date}</p>
-              <br />
-              <p>{data.riddle_text}</p>
-              <br />
-              Komen trus enter buat munculin answer tp ms bug jg si wkwkwk
-              <br />
-              {show && (
-                <p className="answer-detail">Answer : {data.riddle_answer}</p>
-              )}
-              {del && (
-                <p className="answer-detail">Answer : {data.riddle_answer}</p>
-              )}
-            </article>
-          )}
-          {!del && (
-            <div className="commenting">
-              <form action=""></form>
-              <input
-                type="text"
-                id="commentInput"
-                name="commentInput"
-                placeholder="Tambahkan Jawaban..."
-                onKeyDown={handleEnter}
-                required
-                value={commentInput}
-                onChange={(e) => setCommentInput(e.target.value)}
-              />
-            </div>
-          )}
-          {comments?.map((comments) => (
-            // <div className="comments" key={comments.id_riddle}>
-            <div className="comments" key={comments.id_comment}>
-              <div className="comprofile">
-                <img src={comments.img_profile} className="comcircular_image" />
-                <h1>{comments.name}</h1>
-                <p className="date">dibuat {comments.date}</p>
+            )}
+            {comments?.map((comments) => (
+              // <div className="comments" key={comments.id_riddle}>
+              <div className="comments" key={comments.id_comment}>
+                <div className="comprofile">
+                  <img
+                    src={comments.img_profile}
+                    className="comcircular_image"
+                  />
+                  <h1>{comments.name}</h1>
+                  <p className="date">dibuat {comments.date}</p>
+                </div>
+                <p>{comments.comment}</p>
               </div>
-              <p>{comments.comment}</p>
+            ))}
+          </div>
+        </div>
+
+        <div className="column right">
+          <h2>Riddle Lainnya</h2>
+          {riddle?.map((values) => (
+            <div className="other-riddle" key={values.id_riddle}>
+              {/* <Link to={`/get-all-riddle/`}></Link> */}
+              <Link to={`/get-detail-riddle/${values.id_riddle}`}>
+                <h2>{values.title}</h2>
+                <p>
+                  <i>
+                    Written by <span>{values.name}</span>
+                  </i>
+                </p>
+                <br />
+                <p className="other-riddle-body">{values.riddle_text}</p>
+                <br />
+              </Link>
             </div>
           ))}
         </div>
-      </div>
-
-      <div className="column right">
-        <h2>Riddle Lainnya</h2>
-        {riddle?.map((values) => (
-          <div className="other-riddle" key={values.id_riddle}>
-            {/* <Link to={`/get-all-riddle/`}></Link> */}
-            <Link to={`/get-detail-riddle/${values.id_riddle}`}>
-              <h2>{values.title}</h2>
-              <p>
-                <i>
-                  Written by <span>{values.name}</span>
-                </i>
-              </p>
-              <br />
-              <p className="other-riddle-body">{values.riddle_text}</p>
-              <br />
-            </Link>
-          </div>
-        ))}
       </div>
     </div>
   );

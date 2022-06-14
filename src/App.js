@@ -7,19 +7,18 @@ import NotFound from "./NotFound";
 import SignUp from "./SignUp";
 import SignIn from "./SignIn";
 import UserProfile from "./UserProfile";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
     <Router>
       <div className="App">
-        <Navbar />
+        {/* <Navbar /> */}
         <div className="content">
           <Switch>
             <Route exact path="/">
               <Home />
-            </Route>
-            <Route path="/create">
-              <Create />
             </Route>
             <Route path="/sign-up">
               <SignUp />
@@ -27,18 +26,22 @@ function App() {
             <Route path="/sign-in">
               <SignIn />
             </Route>
+            <Route path="/create">
+              <Create />
+            </Route>
             <Route path="/user-profile">
               <UserProfile />
             </Route>
             <Route path="/get-detail-riddle/:id_riddle">
               <RiddleDetails />
             </Route>
-            {/* <Route path="*">
+            <Route path="*">
               <NotFound />
-            </Route> */}
+            </Route>
           </Switch>
         </div>
       </div>
+      <ToastContainer />
     </Router>
   );
 }

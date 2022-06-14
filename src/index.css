@@ -18,6 +18,7 @@ body {
 }
 
 .navbar {
+  /* width: 1; */
   padding: 20px;
   display: flex;
   align-items: center;
@@ -66,9 +67,9 @@ body {
 }
 
 .content {
-  max-width: 1200px;
-  margin: 30px auto;
-  padding: 5px;
+  /* max-width: 1200px; */
+  /* margin: 30px auto; */
+  /* padding: 5px; */
 }
 
 /* sign-up & sign-in */
@@ -558,9 +559,13 @@ select {
 .userProfile {
   /* background-color: #63000030; */
   margin: 10px;
-  padding: 80px 20px;
+  /* padding: 80px 20px; */
   border: 1px solid #630000;
   border-radius: 24px;
+}
+
+.user-detail {
+  margin: 80px 20px;
 }
 
 /* .userProfile h1{
@@ -589,6 +594,16 @@ select {
   overflow: auto;
   /* width: 200px; */
   /* height: 300px; */
+}
+
+.user-pic{
+  display: flex;
+  align-items: center;
+}
+
+.user-pic img{
+  /* size: 50px; */
+  width: 50px;
 }
 
 .userRiddle {
@@ -645,4 +660,24 @@ select {
   height: 110px;
   text-overflow: ellipsis;
   overflow: hidden;
+}
+
+.no-user {
+  text-align: center;
+  background: #630000;
+  color: #EEEBDD;
+  padding: 80px 80px;
+  border-radius: 20px;
+}
+
+.no-user h1 {
+  color: #EEEBDD;
+  /* font-size: 40px; */
+}
+
+.no-user a {
+  font-size: 28px;
+  color: #7e80ff;
+  text-decoration: none;
+
 }
