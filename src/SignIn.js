@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Navbar from "./Navbar";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -61,6 +60,7 @@ const SignIn = () => {
           // setLoginStatus(true);
           setIsPending(false);
           history.push("/");
+          window.location.reload();
           yesToast();
         } else if (!res.data.success) {
           console.log(res.data.message);
@@ -86,48 +86,45 @@ const SignIn = () => {
   };
 
   return (
-    <div className="body-content">
-      <Navbar />
-      <br />
-      <br />
-      <div className="sign-in">
-        <h1>{responServer}</h1>
-        {my_id && <h1>My user ID: {my_id}</h1>}
-        <h1>SIGN IN</h1>
-        <form onSubmit={handleSubmit}>
+    <div className="sign-in">
+      <h1>{responServer}</h1>
+      {my_id && <h1>My user ID: {my_id}</h1>}
+      <h1>SIGN IN</h1>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          required
+          placeholder="Email"
+          value={logEmail}
+          name="loginEmail"
+          onChange={(e) => setLogEmail(e.target.value)}
+        />
+        <br />
+        <div className="input-password">
+          <i
+            onClick={Eye}
+            className={`fa ${eye ? "fa-eye-slash" : "fa-eye"}`}
+          ></i>
           <input
-            type="text"
+            type={password}
             required
-            placeholder="Email"
-            value={logEmail}
-            onChange={(e) => setLogEmail(e.target.value)}
+            placeholder="Password"
+            value={logPasswordInput}
+            name="loginPassword"
+            onChange={(e) => setLogPassword(e.target.value)}
           />
-          <br />
-          <div className="input-password">
-            <i
-              onClick={Eye}
-              className={`fa ${eye ? "fa-eye-slash" : "fa-eye"}`}
-            ></i>
-            <input
-              type={password}
-              required
-              placeholder="Password"
-              value={logPasswordInput}
-              onChange={(e) => setLogPassword(e.target.value)}
-            />
-          </div>
-          <p>
-            Don't have any account? <a href="/sign-up">SIGN UP</a>
-          </p>
-          <div className="sign-in-button">
-            {!isPending && <button>LOGIN</button>}
-            {isPending && <button disabled>LOGIN...</button>}
-            <button onClick={handleCancel} className="cancel-login">
-              CANCEL
-            </button>
-          </div>
-        </form>
-      </div>
+        </div>
+        <p>
+          Don't have any account? <a href="/sign-up">SIGN UP</a>
+        </p>
+        <div className="sign-in-button">
+          {!isPending && <button>LOGIN</button>}
+          {isPending && <button disabled>LOGIN...</button>}
+          <button onClick={handleCancel} className="cancel-login">
+            CANCEL
+          </button>
+        </div>
+      </form>
     </div>
   );
 };

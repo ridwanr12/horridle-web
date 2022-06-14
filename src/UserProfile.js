@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import axios from "axios";
-import Navbar from "./Navbar";
 import { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import {
+  useHistory,
+  useParams,
+} from "react-router-dom/cjs/react-router-dom.min";
 import { render } from "@testing-library/react";
 
 const UserProfile = () => {
@@ -48,6 +50,7 @@ const UserProfile = () => {
   const handleLogout = () => {
     window.localStorage.removeItem("user id");
     history.push("/");
+    window.location.reload();
   };
   const handleEdit = () => {
     history.push("/edit-profile");
@@ -58,66 +61,63 @@ const UserProfile = () => {
   // console.log(userRiddle);
   // console.log(lenRiddles);
   return (
-    <div className="body-content">
-      <Navbar />
-      <br />
-      <br />
-      <div className="userProfile">
-        {isPending && <div>Loading ....</div>}
-        {error && <div>{error}</div>}
-        {userDetail && (
-          <div className="user-detail">
-            <div className="user-pic">
-              <img src={userDetail.img_profile} className="comcircular_image" />
-              <div className="user-name">
-                <h1>{userDetail.name}</h1>
-                {lenRiddles && <p>{lenRiddles} posts of riddle</p>}
-              </div>
+    <div className="userProfile">
+      {isPending && <div>Loading ....</div>}
+      {error && <div>{error}</div>}
+      {userDetail && (
+        <div className="user-detail">
+          <div className="user-pic">
+            <img src={userDetail.img_profile} className="comcircular_image" />
+            <div className="user-name">
+              <h1>{userDetail.name}</h1>
+              {lenRiddles && <p>{lenRiddles} posts of riddle</p>}
+            </div>
+            <div className="user-button">
               <button onClick={handleLogout}>Logout</button>
-              <button onClick={handleEdit}>Edit</button>
+              <button onClick={handleEdit}>Edit Profile</button>
             </div>
-            <br />
-            <br />
-            <div className="posts">
-              <h2>Posts</h2>
-              <div className="links">
-                <Link to={"/create"}>+ Add</Link>
-              </div>
+          </div>
+          <br />
+          <br />
+          <div className="posts">
+            <h2>Posts</h2>
+            <div className="links">
+              <Link to={"/create"}>+ Add</Link>
             </div>
-            <div className="user-riddle">
-              {userRiddle?.map((values) => (
-                <div className="userRiddle" key={values.id_riddle}>
-                  <Link to={`/get-detail-riddle/${values.id_riddle}`}>
-                    <h2>{values.title}</h2>
-                    <br />
-                    <p className="user-riddle-body">{values.riddle_text}</p>
-                    <br />
-                    <div className="riddle-answer">
-                      <p>
-                        <span>Answer</span>
-                      </p>
-                      <p>{values.riddle_answer}</p>
-                    </div>
-                    <br />
+          </div>
+          <div className="user-riddle">
+            {userRiddle?.map((values) => (
+              <div className="userRiddle" key={values.id_riddle}>
+                <Link to={`/get-detail-riddle/${values.id_riddle}`}>
+                  <h2>{values.title}</h2>
+                  <br />
+                  <p className="user-riddle-body">{values.riddle_text}</p>
+                  <br />
+                  <div className="riddle-answer">
                     <p>
-                      <i>
-                        Written by <span>You</span>
-                      </i>
+                      <span>Answer</span>
                     </p>
-                    <br />
-                  </Link>
-                </div>
-              ))}
-            </div>
+                    <p>{values.riddle_answer}</p>
+                  </div>
+                  <br />
+                  <p>
+                    <i>
+                      Written by <span>You</span>
+                    </i>
+                  </p>
+                  <br />
+                </Link>
+              </div>
+            ))}
           </div>
-        )}
-        {!userDetail && (
-          <div className="no-user">
-            <h1>Please Sign In</h1>
-            <Link to="/sign-in">Sign In</Link>
-          </div>
-        )}
-      </div>
+        </div>
+      )}
+      {!userDetail && (
+        <div className="no-user">
+          <h1>Please Sign In</h1>
+          <Link to="/sign-in">Sign In</Link>
+        </div>
+      )}
     </div>
   );
 };

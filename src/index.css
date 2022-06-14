@@ -6,19 +6,13 @@
   margin: 0px;
   font-family: "Inter";
   color: #333;
-
 }
 
 body {
-  /* top: 0; */
   background-color: #fafafa;
-  /* background-image: url('navbar.png'); */
-  /* background-repeat:repeat-y; */
-  /* background-position:top; */
 }
 
 .navbar {
-  /* width: 1; */
   padding: 20px;
   display: flex;
   align-items: center;
@@ -58,7 +52,15 @@ body {
   width: 150px;
   height: 60px;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 88px;
+}
+
+/* Change the white to any color */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px #630000 inset !important;
+  -webkit-text-fill-color: #EEEBDD !important;
 }
 
 .navbar a:hover {
@@ -67,9 +69,9 @@ body {
 }
 
 .content {
-  /* max-width: 1200px; */
-  /* margin: 30px auto; */
-  /* padding: 5px; */
+  max-width: 1200px;
+  margin: 30px auto;
+  padding: 16px;
 }
 
 /* sign-up & sign-in */
@@ -259,26 +261,36 @@ body {
   margin-bottom: 10px;
 }
 
-.horridle-details div {
-  margin: 20px 0;
-}
-
 .horridle-details button {
-  background: #630000;
+  /* background: #630000;
   color: #fff;
   border: 0;
   padding: 8px;
   border-radius: 8px;
+  cursor: pointer; */
+  font-weight: bold;
+  margin-left: 8px;
+  padding: 8px 16px;
+  color: #630000;
+  border: 1px solid #630000;
+  background-color: #EEEBDD;
+  border-radius: 40px;
   cursor: pointer;
+  font-size: 16px;
+}
+
+.delete-riddle {
+  margin-left: auto;
 }
 
 .delete-riddle button {
-  background: #630000;
+  /* background: #630000;
   color: #fff;
   border: 0;
   padding: 8px;
   border-radius: 8px;
-  cursor: pointer;
+  cursor: pointer; */
+  margin-right: 4px;
 }
 
 
@@ -413,6 +425,28 @@ body {
   height: auto;
 }
 
+.riddle-user-profile {
+  display: flex;
+  align-items: center;
+}
+
+.riddle-user-profile img {
+  /* clip-path: circle();
+  width: 40px;
+  height: 52px;
+  margin-right: 16px; */
+
+  object-fit: cover;
+  border-radius: 50%;
+  height: 60px;
+  width: 60px;
+  margin-right: 12px;
+}
+
+.riddle-user-name {
+  margin: 0;
+}
+
 /* Box Comment */
 .commenting input[type=text],
 select {
@@ -427,13 +461,32 @@ select {
 }
 
 
-/* Riddle preview / lists */
 .comments {
   border: 1px solid #C4C4C4;
   border-radius: 20px;
-  padding: 0 16px 14px 16px;
+  margin: 20px 0;
+  padding: 8px 8px;
+  /* padding-left: 12px;
+  padding-bottom: 16px; */
+  /* padding: 0 16px 14px 16px; */
   /* margin: 40px 60px; */
   background: #eeebdd40;
+}
+
+.comprofile {
+  display: flex;
+  align-items: center;
+}
+
+.comprofile img {
+  /* clip-path: circle(); */
+  /* max-width: 48px; */
+  /* height: 40px;*/
+  margin-right: 5px;
+  object-fit: cover;
+  border-radius: 50%;
+  height: 36px;
+  width: 36px;
 }
 
 .comments .date {
@@ -462,6 +515,13 @@ select {
 
 .comments a {
   text-decoration: none;
+}
+
+.comments-text{
+  font-size: 18px;
+  margin-top: 16px;
+  margin-left: 40px;
+  margin-bottom: 12px;
 }
 
 .column {
@@ -512,7 +572,7 @@ select {
   .right {
     margin: 0 8px;
     /* margin-right: auto; */
-    width: 98%;
+    width: 95%;
   }
 }
 
@@ -550,16 +610,8 @@ select {
   overflow: hidden;
 }
 
-.comcircular_image {
-  clip-path: circle();
-  max-width: 40px;
-  height: auto;
-}
-
 .userProfile {
-  /* background-color: #63000030; */
   margin: 10px;
-  /* padding: 80px 20px; */
   border: 1px solid #630000;
   border-radius: 24px;
 }
@@ -567,10 +619,6 @@ select {
 .user-detail {
   margin: 80px 20px;
 }
-
-/* .userProfile h1{
-  font-size: 100px;
-} */
 
 .posts {
   display: flex;
@@ -584,7 +632,6 @@ select {
 .posts .links {
   margin-left: auto;
   text-decoration: none;
-  /* margin: 0 auto; */
 }
 
 .user-riddle {
@@ -596,14 +643,34 @@ select {
   /* height: 300px; */
 }
 
-.user-pic{
+.user-pic {
   display: flex;
   align-items: center;
 }
 
-.user-pic img{
-  /* size: 50px; */
-  width: 50px;
+.user-pic img {
+  object-fit: cover;
+  border-radius: 50%;
+  height: 100px;
+  width: 100px;
+  margin-right: 12px;
+}
+
+.user-button {
+  /* display: fl; */
+  margin-left: auto;
+}
+
+.user-button button {
+  font-weight: bold;
+  margin-left: 8px;
+  padding: 8px 16px;
+  color: #630000;
+  border: 1px solid #630000;
+  background-color: #EEEBDD;
+  border-radius: 40px;
+  cursor: pointer;
+  /* box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25); */
 }
 
 .userRiddle {

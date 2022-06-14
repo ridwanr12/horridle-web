@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Navbar from "./Navbar";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -46,6 +45,7 @@ const SignUp = () => {
         console.log("res", res);
         setIsPending(false);
         history.push("/");
+        window.location.reload();
         yesToast();
       });
   };
@@ -65,55 +65,50 @@ const SignUp = () => {
   };
 
   return (
-    <div className="body-content">
-      <Navbar />
-      <br />
-      <br />
-      <div className="sign-up">
-        <h1>SIGN UP</h1>
-        <form onSubmit={handleSubmit}>
+    <div className="sign-up">
+      <h1>SIGN UP</h1>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          required
+          placeholder="Name"
+          value={regNama}
+          onChange={(e) => setRegNama(e.target.value)}
+        />
+        <br />
+        <br />
+        <input
+          type="text"
+          required
+          placeholder="Email"
+          value={regEmail}
+          onChange={(e) => setRegEmail(e.target.value)}
+        />
+        <br />
+        <div className="input-password">
+          <i
+            onClick={Eye}
+            className={`fa ${eye ? "fa-eye-slash" : "fa-eye"}`}
+          ></i>
           <input
-            type="text"
+            type={password}
             required
-            placeholder="Name"
-            value={regNama}
-            onChange={(e) => setRegNama(e.target.value)}
+            placeholder="Password"
+            value={regPasswordInput}
+            onChange={(e) => setRegPassword(e.target.value)}
           />
-          <br />
-          <br />
-          <input
-            type="text"
-            required
-            placeholder="Email"
-            value={regEmail}
-            onChange={(e) => setRegEmail(e.target.value)}
-          />
-          <br />
-          <div className="input-password">
-            <i
-              onClick={Eye}
-              className={`fa ${eye ? "fa-eye-slash" : "fa-eye"}`}
-            ></i>
-            <input
-              type={password}
-              required
-              placeholder="Password"
-              value={regPasswordInput}
-              onChange={(e) => setRegPassword(e.target.value)}
-            />
-          </div>
-          <p>
-            Already have account? <a href="/sign-in">LOGIN</a>
-          </p>
-          <div className="sign-up-button">
-            {!isPending && <button>REGISTER</button>}
-            {isPending && <button disabled>CREATING...</button>}
-            <button onClick={handleCancel} className="cancel-regist">
-              CANCEL
-            </button>
-          </div>
-        </form>
-      </div>
+        </div>
+        <p>
+          Already have account? <a href="/sign-in">LOGIN</a>
+        </p>
+        <div className="sign-up-button">
+          {!isPending && <button>REGISTER</button>}
+          {isPending && <button disabled>CREATING...</button>}
+          <button onClick={handleCancel} className="cancel-regist">
+            CANCEL
+          </button>
+        </div>
+      </form>
     </div>
   );
 };
