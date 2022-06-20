@@ -10,6 +10,7 @@ const RiddleDetails = () => {
 
   // const [user, setUser] = useState(8);
   const user = localStorage.getItem("user id");
+  const role = localStorage.getItem("role");
 
   const [data, setData] = useState(null);
   const [comments, setComments] = useState(null);
@@ -43,44 +44,53 @@ const RiddleDetails = () => {
           setIsPending(false);
           setError(null);
           // beberapa cek untuk handle show jawaban & komentar
-          if (user == res[0].data.values[0].id_user) {
-            console.log("Pemilik riddle");
+          if (role == 1) {
+            console.log("admin");
             setIsAuthor(true);
             setShow(true);
             setIsLogin(true);
-          } else if (localStorage.getItem("user id") === null) {
-            console.log("Belum login");
-            setIsLogin(false);
-            setIsAuthor(false);
-            setShow(false);
-          } else if (user != res[0].data.values[0].id_user) {
-            if (comments.length >= 1) {
-              for (let i = 0; i < comments.length; i++) {
-                // console.log(i);
-                // console.log(comments[i]);
-                if (comments[i].id_user == user) {
-                  // console.log("pernah???");
-                  setPernah(true);
-                  break;
+          } else if (role == 2) {
+            if (user == res[0].data.values[0].id_user) {
+              console.log("Pemilik riddle");
+              setIsAuthor(true);
+              setShow(true);
+              setIsLogin(true);
+            } else if (localStorage.getItem("user id") === null) {
+              console.log("Belum login");
+              setIsLogin(false);
+              setIsAuthor(false);
+              setShow(false);
+            } else if (user != res[0].data.values[0].id_user) {
+              if (comments.length >= 1) {
+                for (let i = 0; i < comments.length; i++) {
+                  // console.log(i);
+                  // console.log(comments[i]);
+                  if (comments[i].id_user == user) {
+                    // console.log("pernah???");
+                    setPernah(true);
+                    break;
+                  }
+                  setPernah(false);
                 }
-                setPernah(false);
-              }
-              if (pernah) {
-                console.log("bukan pemilik tapi sudah pernah menjawab");
-                setShow(true);
-                setIsAuthor(false);
-                setIsLogin(true);
-              } else if (!pernah) {
-                console.log("belum jawab");
+                if (pernah) {
+                  console.log("bukan pemilik tapi sudah pernah menjawab");
+                  setShow(true);
+                  setIsAuthor(false);
+                  setIsLogin(true);
+                } else if (!pernah) {
+                  console.log("belum jawab");
+                  setShow(false);
+                  setIsAuthor(false);
+                  setIsLogin(true);
+                }
+              } else if (comments.length == 0) {
+                console.log(
+                  "bukan pemilik riddle dan bahkan belum ada jawaban"
+                );
                 setShow(false);
                 setIsAuthor(false);
                 setIsLogin(true);
               }
-            } else if (comments.length == 0) {
-              console.log("bukan pemilik riddle dan bahkan belum ada jawaban");
-              setShow(false);
-              setIsAuthor(false);
-              setIsLogin(true);
             }
           }
         })

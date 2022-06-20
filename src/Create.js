@@ -27,7 +27,8 @@ const Create = () => {
         riddle_text: riddle_text,
         riddle_answer: answer,
       })
-      .then(() => {
+      .then((res) => {
+        console.log(res);
         // console.log("new riddle added");
         setIsPending(false);
         history.push("/");

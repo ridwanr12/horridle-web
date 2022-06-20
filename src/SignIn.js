@@ -56,12 +56,12 @@ const SignIn = () => {
           console.log(res.data.message);
           setResponServer(res.data.message);
           localStorage.setItem("user id", res.data.my_user_id);
-          setMyId(localStorage.getItem("user id"));
+          localStorage.setItem("role", res.data.my_role);
           // setLoginStatus(true);
           setIsPending(false);
           history.push("/");
           window.location.reload();
-          yesToast();
+          // yesToast();
         } else if (!res.data.success) {
           console.log(res.data.message);
           setResponServer(res.data.message);

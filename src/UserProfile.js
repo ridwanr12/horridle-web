@@ -38,6 +38,7 @@ const UserProfile = () => {
 
   const handleLogout = () => {
     window.localStorage.removeItem("user id");
+    window.localStorage.removeItem("role");
     history.push("/");
     window.location.reload();
   };
