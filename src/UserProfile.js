@@ -1,20 +1,10 @@
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import {
-  useHistory,
-  useParams,
-} from "react-router-dom/cjs/react-router-dom.min";
-import { render } from "@testing-library/react";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const UserProfile = () => {
   const history = useHistory();
-  // const { user } = useParams();
-
-  // const [user, setUser] = useState(8);
-  // const [user, setUser] = useState(localStorage.getItem("user id"));
-
-  // setUser(localStorage.getItem("user id"));
 
   const user = localStorage.getItem("user id");
 
@@ -29,29 +19,29 @@ const UserProfile = () => {
   const userRiddlesAPI = "http://localhost:3000/get-user-riddles/";
 
   useEffect(() => {
-    const req1 = axios.post(userDetailAPI, { id_user: user });
-    const req2 = axios.post(userRiddlesAPI, { id_user_author: user });
-    axios.all([req1, req2]).then(
-      axios.spread((...res) => {
-        // console.log(res);
-        setUserDetail(res[0].data.values[0]);
-        setUserRiddle(res[1].data.values);
-        setIsPending(false);
-        setError(null);
-        if (!isPending) {
-          setLenRiddles(userRiddle.length);
-        }
-      })
-    );
-  });
-
-  const handleLength = () => {};
+    setTimeout(() => {
+      const req1 = axios.post(userDetailAPI, { id_user: user });
+      const req2 = axios.post(userRiddlesAPI, { id_user_author: user });
+      axios.all([req1, req2]).then(
+        axios.spread((...res) => {
+          // console.log(res);
+          setUserDetail(res[0].data.values[0]);
+          setUserRiddle(res[1].data.values);
+          setIsPending(false);
+          setError(null);
+          setLenRiddles(res[1].data.values.length);
+          console.log(res[1].data.values.length);
+        })
+      );
+    }, 250);
+  }, []);
 
   const handleLogout = () => {
     window.localStorage.removeItem("user id");
     history.push("/");
     window.location.reload();
   };
+
   const handleEdit = () => {
     history.push("/edit-profile");
   };
@@ -62,15 +52,27 @@ const UserProfile = () => {
   // console.log(lenRiddles);
   return (
     <div className="userProfile">
-      {isPending && <div>Loading ....</div>}
+      {isPending && (
+        <div className="loading">
+          <h2>Loading ....</h2>
+        </div>
+      )}
       {error && <div>{error}</div>}
-      {userDetail && (
+      {userDetail ? (
         <div className="user-detail">
           <div className="user-pic">
             <img src={userDetail.img_profile} className="comcircular_image" />
             <div className="user-name">
               <h1>{userDetail.name}</h1>
-              {lenRiddles && <p>{lenRiddles} posts of riddle</p>}
+              {lenRiddles ? (
+                <>
+                  <p>{lenRiddles} posts of riddle</p>
+                </>
+              ) : (
+                <>
+                  <p>0 posts of riddle</p>
+                </>
+              )}
             </div>
             <div className="user-button">
               <button onClick={handleLogout}>Logout</button>
@@ -111,13 +113,14 @@ const UserProfile = () => {
             ))}
           </div>
         </div>
-      )}
-      {!userDetail && (
+      ) : (
         <div className="no-user">
           <h1>Please Sign In</h1>
           <Link to="/sign-in">Sign In</Link>
         </div>
       )}
+      {/* {!userDetail && (
+      )} */}
     </div>
   );
 };

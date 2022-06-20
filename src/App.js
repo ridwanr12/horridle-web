@@ -2,12 +2,13 @@ import Navbar from "./Navbar";
 import Home from "./Home";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Create from "./Create";
+import EditRiddle from "./EditRiddle";
 import RiddleDetails from "./RiddleDetails";
 import NotFound from "./NotFound";
 import SignUp from "./SignUp";
 import SignIn from "./SignIn";
 import UserProfile from "./UserProfile";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function App() {
@@ -28,6 +29,9 @@ function App() {
             </Route>
             <Route path="/create">
               <Create />
+            </Route>
+            <Route path="/edit/:id_riddle">
+              <EditRiddle />
             </Route>
             <Route path="/user-profile">
               <UserProfile />

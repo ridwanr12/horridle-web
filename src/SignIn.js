@@ -26,7 +26,7 @@ const SignIn = () => {
       autoClose: 2000,
       draggable: false,
       theme: "colored",
-      pauseOnFocusLoss: false,
+      // pauseOnFocusLoss: false,
     });
   };
   const noToast = () => {

@@ -72,7 +72,7 @@ const UserProfile = () => {
   // console.log(lenRiddles);
   return (
     <div className="userProfile">
-      {isPending && <div>Loading ....</div>}
+      {isPending && <div className="loading"><h2>Loading ....</h2></div>}
       {error && <div>{error}</div>}
       {userDetail && (
         <div className="user-detail">

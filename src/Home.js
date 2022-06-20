@@ -3,7 +3,6 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 const Home = () => {
-
   // const [user, setUser] = useState(8);
 
   const [data, setData] = useState(null);
@@ -12,18 +11,20 @@ const Home = () => {
   const [error, setError] = useState(null);
 
   const riddlesAPI = "http://localhost:3000/get-all-riddle";
-
   useEffect(() => {
-    axios.post(riddlesAPI).then((res) => {
-      // console.log(res);
-      setData(res.data.values);
-      setIsPending(false);
-      setError(null);
-    });
-  });
+    setTimeout(() => {
+      axios.post(riddlesAPI).then((res) => {
+        // console.log(res);
+        setData(res.data.values);
+        setIsPending(false);
+        setError(null);
+      });
+    }, 500);
+  }, []);
+
   return (
     <div className="values-list">
-      {isPending && <div>Loading ....</div>}
+      {isPending && <div className="loading"><h2>Loading ....</h2></div>}
       {error && <div>{error}</div>}
       {data?.map((values) => (
         <div className="horridle-preview" key={values.id_riddle}>

@@ -19,67 +19,95 @@ const RiddleDetails = () => {
   const [error, setError] = useState(null);
 
   const [show, setShow] = useState(false);
+  const [pernah, setPernah] = useState(false);
   const [commentInput, setCommentInput] = useState("");
-  const [del, setDel] = useState(false);
+  const [isAuthor, setIsAuthor] = useState(false);
+  const [isLogin, setIsLogin] = useState(false);
 
   const detailAPI = "http://localhost:3000/get-detail-riddle/";
   const allCommentsAPI = "http://localhost:3000/get-riddle-comments/";
   const allAPI = "http://localhost:3000/get-all-riddle/";
+  const commentAPI = "http://localhost:3000/comment-riddle/";
 
   useEffect(() => {
-    const req1 = axios.post(detailAPI, { id_riddle: id_riddle });
-    const req2 = axios.post(allCommentsAPI, { id_riddle: id_riddle });
-    const req3 = axios.post(allAPI, { id_riddle: id_riddle });
-    axios.all([req1, req2, req3]).then(
-      axios.spread((...res) => {
-        // console.log(res);
-        setData(res[0].data.values[0]);
-        setComments(res[1].data.values);
-        setRiddle(res[2].data.values);
-        setIsPending(false);
-        setError(null);
-        // console.log(data);
-        if (user == data.id_user) {
-          console.log("bener");
-          setDel(true);
-        } else {
-          console.log("bukan pemilik riddle");
-          setDel(false);
-        }
-      })
-    );
+    setTimeout(() => {
+      const req1 = axios.post(detailAPI, { id_riddle: id_riddle });
+      const req2 = axios.post(allCommentsAPI, { id_riddle: id_riddle });
+      const req3 = axios.post(allAPI, { id_riddle: id_riddle });
+      axios.all([req1, req2, req3]).then(
+        axios.spread((...res) => {
+          // console.log(res);
+          setData(res[0].data.values[0]);
+          setComments(res[1].data.values);
+          setRiddle(res[2].data.values);
+          setIsPending(false);
+          setError(null);
+          // beberapa cek untuk handle show jawaban & komentar
+          if (user == res[0].data.values[0].id_user) {
+            console.log("Pemilik riddle");
+            setIsAuthor(true);
+            setShow(true);
+            setIsLogin(true);
+          } else if (localStorage.getItem("user id") === null) {
+            console.log("Belum login");
+            setIsLogin(false);
+            setIsAuthor(false);
+            setShow(false);
+          } else if (user != res[0].data.values[0].id_user) {
+            if (comments.length >= 1) {
+              for (let i = 0; i < comments.length; i++) {
+                // console.log(i);
+                // console.log(comments[i]);
+                if (comments[i].id_user == user) {
+                  // console.log("pernah???");
+                  setPernah(true);
+                  break;
+                }
+                setPernah(false);
+              }
+              if (pernah) {
+                console.log("bukan pemilik tapi sudah pernah menjawab");
+                setShow(true);
+                setIsAuthor(false);
+                setIsLogin(true);
+              } else if (!pernah) {
+                console.log("belum jawab");
+                setShow(false);
+                setIsAuthor(false);
+                setIsLogin(true);
+              }
+            } else if (comments.length == 0) {
+              console.log("bukan pemilik riddle dan bahkan belum ada jawaban");
+              setShow(false);
+              setIsAuthor(false);
+              setIsLogin(true);
+            }
+          }
+        })
+      );
+    }, 500);
   });
 
   const handleClick = () => {
     history.push("/");
   };
-  // console.log(user);
 
-  const handleEnter = (e) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      console.log(commentInput);
-      setShow(true);
-    }
-  };
-
-  const handleComment = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
+    window.location.reload();
+    console.log(commentInput);
 
     setIsPending(true);
 
     axios
-      .post("localhost:3000/comment-riddle", {
+      .post(commentAPI, {
         id_riddle: id_riddle,
         id_user: user,
         comment: commentInput,
       })
       .then((res) => {
-        console.log("res");
-        console.log(res);
-        console.log("new riddle added");
+        console.log("res", res);
         setIsPending(false);
-        history.push("/");
       });
   };
 
@@ -99,7 +127,11 @@ const RiddleDetails = () => {
   return (
     <div className="page-detail">
       <button onClick={handleClick} className="back-arrow"></button>
-      {isPending && <div>Loading ....</div>}
+      {isPending && (
+        <div className="loading">
+          <h2>Loading ....</h2>
+        </div>
+      )}
       {error && <div>{error}</div>}
       <div className="column left">
         <div className="horridle-details">
@@ -112,54 +144,76 @@ const RiddleDetails = () => {
                   <h2>{data.name}</h2>
                   <p>Created at {data.date}</p>
                 </div>
-                {del && (
-                  <div className="delete-riddle">
+                {isAuthor && (
+                  <div className="button-riddle">
+                    {/* <Link to="/edit" className="plus-create"> */}
+                    {/* <Link to="/edit"> */}
+                    <Link to={`/edit/${data.id_riddle}`}>
+                      <button>Edit</button>
+                    </Link>
                     <button onClick={handleDelete}>Delete</button>
                   </div>
                 )}
               </div>
               <br />
               <p>{data.riddle_text}</p>
-              <br />
-              Komen trus enter buat munculin answer tp ms bug jg si wkwkwk
-              <br />
               {show && (
                 <p className="answer-detail">Answer : {data.riddle_answer}</p>
               )}
-              {del && (
-                <p className="answer-detail">Answer : {data.riddle_answer}</p>
-              )}
+              {/* {isAuthor && (
+                <p className="answer-detail">Author Answer : {data.riddle_answer}</p>
+              )} */}
             </article>
           )}
-          {!del && (
-            <div className="commenting">
-              <form action=""></form>
-              <input
-                type="text"
-                // id="commentInput"
-                // name="commentInput"
-                placeholder="Tambahkan Jawaban..."
-                onKeyDown={handleEnter}
-                required
-                value={commentInput}
-                onChange={(e) => setCommentInput(e.target.value)}
-              />
-            </div>
-          )}
-          {comments?.map((comments) => (
-            // <div className="comments" key={comments.id_riddle}>
-            <div className="comments" key={comments.id_comment}>
-              <div className="comprofile">
-                <img src={comments.img_profile} className="comcircular_image" />
-                <div className="com-name">
-                  <h1>{comments.name}</h1>
-                  <p className="date">dibuat {comments.date}</p>
+          {isLogin ? (
+            <>
+              {!isAuthor && (
+                <div className="commenting">
+                  <form onSubmit={handleSubmit}>
+                    <input
+                      type="text"
+                      placeholder="Tambahkan Jawaban..."
+                      // onKeyDown={handleEnter}
+                      required
+                      value={commentInput}
+                      onChange={(e) => setCommentInput(e.target.value)}
+                    />
+                    <div className="comment">
+                      {!isPending && <button>Comment</button>}
+                      {isPending && <button disabled>Commenting...</button>}
+                    </div>
+                  </form>
                 </div>
+              )}
+            </>
+          ) : (
+            <>
+              <div className="commenting">
+                <input type="text" placeholder="Please Sign In" disabled />
               </div>
-              {/* <br /> */}
-              <p className="comments-text">{comments.comment}</p>
-            </div>
-          ))}
+            </>
+          )}
+          {show && (
+            <>
+              {comments?.map((comments) => (
+                // <div className="comments" key={comments.id_riddle}>
+                <div className="comments" key={comments.id_comment}>
+                  <div className="comprofile">
+                    <img
+                      src={comments.img_profile}
+                      className="comcircular_image"
+                    />
+                    <div className="com-name">
+                      <h1>{comments.name}</h1>
+                      <p className="date">dibuat {comments.date}</p>
+                    </div>
+                  </div>
+                  {/* <br /> */}
+                  <p className="comments-text">{comments.comment}</p>
+                </div>
+              ))}
+            </>
+          )}
         </div>
       </div>
 
@@ -167,7 +221,6 @@ const RiddleDetails = () => {
         <h2>Riddle Lainnya</h2>
         {riddle?.map((values) => (
           <div className="other-riddle" key={values.id_riddle}>
-            {/* <Link to={`/get-all-riddle/`}></Link> */}
             <Link to={`/get-detail-riddle/${values.id_riddle}`}>
               <h2>{values.title}</h2>
               <p>

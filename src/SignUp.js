@@ -13,6 +13,7 @@ const SignUp = () => {
   const img_profile =
     "https://i.pinimg.com/736x/20/0d/72/200d72a18492cf3d7adac8a914ef3520.jpg";
   const [isPending, setIsPending] = useState(false);
+  const [my_id, setMyId] = useState("");
 
   const [eye, seteye] = useState(true);
   const [password, setpassword] = useState("password");
@@ -44,8 +45,12 @@ const SignUp = () => {
       .then((res) => {
         console.log("res", res);
         setIsPending(false);
+        localStorage.setItem("user id", res.data.my_user_id);
+        setMyId(localStorage.getItem("user id"));
         history.push("/");
         window.location.reload();
+        yesToast();
+        yesToast();
         yesToast();
       });
   };
