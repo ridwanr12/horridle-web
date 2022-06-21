@@ -86,45 +86,47 @@ const SignIn = () => {
   };
 
   return (
-    <div className="sign-in">
-      <h1>{responServer}</h1>
-      {my_id && <h1>My user ID: {my_id}</h1>}
-      <h1>SIGN IN</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          required
-          placeholder="Email"
-          value={logEmail}
-          name="loginEmail"
-          onChange={(e) => setLogEmail(e.target.value)}
-        />
-        <br />
-        <div className="input-password">
-          <i
-            onClick={Eye}
-            className={`fa ${eye ? "fa-eye-slash" : "fa-eye"}`}
-          ></i>
+    <div className="page-sign-in">
+      <div className="sign-in">
+        <h1>{responServer}</h1>
+        {my_id && <h1>My user ID: {my_id}</h1>}
+        <h1>SIGN IN</h1>
+        <form onSubmit={handleSubmit}>
           <input
-            type={password}
+            type="text"
             required
-            placeholder="Password"
-            value={logPasswordInput}
-            name="loginPassword"
-            onChange={(e) => setLogPassword(e.target.value)}
+            placeholder="Email"
+            value={logEmail}
+            name="loginEmail"
+            onChange={(e) => setLogEmail(e.target.value)}
           />
-        </div>
-        <p>
-          Don't have any account? <a href="/sign-up">SIGN UP</a>
-        </p>
-        <div className="sign-in-button">
-          {!isPending && <button>LOGIN</button>}
-          {isPending && <button disabled>LOGIN...</button>}
-          <button onClick={handleCancel} className="cancel-login">
-            CANCEL
-          </button>
-        </div>
-      </form>
+          <br />
+          <div className="input-password">
+            <i
+              onClick={Eye}
+              className={`fa ${eye ? "fa-eye-slash" : "fa-eye"}`}
+            ></i>
+            <input
+              type={password}
+              required
+              placeholder="Password"
+              value={logPasswordInput}
+              name="loginPassword"
+              onChange={(e) => setLogPassword(e.target.value)}
+            />
+          </div>
+          <p>
+            Don't have any account? <a href="/sign-up">SIGN UP</a>
+          </p>
+          <div className="sign-in-button">
+            {!isPending && <button>LOGIN</button>}
+            {isPending && <button disabled>LOGIN...</button>}
+            <button onClick={handleCancel} className="cancel-login">
+              CANCEL
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

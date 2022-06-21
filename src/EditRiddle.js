@@ -69,7 +69,7 @@ const EditRiddle = () => {
   };
 
   return (
-    <>
+    <div className="page-edit">
       {isPending && <div className="loading"><h2>Loading ....</h2></div>}
       {isOwner && (
         <div className="edit">
@@ -110,7 +110,7 @@ const EditRiddle = () => {
       {!isOwner && (
         <div className="not-owner">You're not the <b>owner</b></div>
       )}
-    </>
+    </div>
   );
 };
 

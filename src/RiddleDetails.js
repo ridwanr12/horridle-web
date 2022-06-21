@@ -14,6 +14,7 @@ const RiddleDetails = () => {
 
   const [data, setData] = useState(null);
   const [comments, setComments] = useState(null);
+  const [commentsid, setCommentsId] = useState(null);
   const [riddle, setRiddle] = useState(null);
 
   const [isPending, setIsPending] = useState(true);
@@ -132,6 +133,21 @@ const RiddleDetails = () => {
       });
   };
 
+  const handleComDelete = (e) => {
+    console.log(user);
+    // console.log(e);
+    console.log(e);
+    // console.log(comments[0].id_comment);
+    // axios
+    //   .post("http://localhost:3000/delete-comment/", {
+    //     id_comment: id_comment,
+    //   })
+    //   .then((res) => {
+    //     console.log(res);
+    //     history.push("/");
+    //   });
+  };
+
   // console.log(data);
   // console.log(allComments);
   return (
@@ -206,7 +222,6 @@ const RiddleDetails = () => {
           {show && (
             <>
               {comments?.map((comments) => (
-                // <div className="comments" key={comments.id_riddle}>
                 <div className="comments" key={comments.id_comment}>
                   <div className="comprofile">
                     <img
@@ -217,6 +232,13 @@ const RiddleDetails = () => {
                       <h1>{comments.name}</h1>
                       <p className="date">dibuat {comments.date}</p>
                     </div>
+                    {role == 1 && (
+                      <>
+                        <Link to={`/get-detail-comment/${comments.id_comment}`}>
+                          <h2>To Detail Comment</h2>
+                        </Link>
+                      </>
+                    )}
                   </div>
                   {/* <br /> */}
                   <p className="comments-text">{comments.comment}</p>

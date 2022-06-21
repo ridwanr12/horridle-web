@@ -70,50 +70,52 @@ const SignUp = () => {
   };
 
   return (
-    <div className="sign-up">
-      <h1>SIGN UP</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          required
-          placeholder="Name"
-          value={regNama}
-          onChange={(e) => setRegNama(e.target.value)}
-        />
-        <br />
-        <br />
-        <input
-          type="text"
-          required
-          placeholder="Email"
-          value={regEmail}
-          onChange={(e) => setRegEmail(e.target.value)}
-        />
-        <br />
-        <div className="input-password">
-          <i
-            onClick={Eye}
-            className={`fa ${eye ? "fa-eye-slash" : "fa-eye"}`}
-          ></i>
+    <div className="page-sign-up">
+      <div className="sign-up">
+        <h1>SIGN UP</h1>
+        <form onSubmit={handleSubmit}>
           <input
-            type={password}
+            type="text"
             required
-            placeholder="Password"
-            value={regPasswordInput}
-            onChange={(e) => setRegPassword(e.target.value)}
+            placeholder="Name"
+            value={regNama}
+            onChange={(e) => setRegNama(e.target.value)}
           />
-        </div>
-        <p>
-          Already have account? <a href="/sign-in">LOGIN</a>
-        </p>
-        <div className="sign-up-button">
-          {!isPending && <button>REGISTER</button>}
-          {isPending && <button disabled>CREATING...</button>}
-          <button onClick={handleCancel} className="cancel-regist">
-            CANCEL
-          </button>
-        </div>
-      </form>
+          <br />
+          <br />
+          <input
+            type="text"
+            required
+            placeholder="Email"
+            value={regEmail}
+            onChange={(e) => setRegEmail(e.target.value)}
+          />
+          <br />
+          <div className="input-password">
+            <i
+              onClick={Eye}
+              className={`fa ${eye ? "fa-eye-slash" : "fa-eye"}`}
+            ></i>
+            <input
+              type={password}
+              required
+              placeholder="Password"
+              value={regPasswordInput}
+              onChange={(e) => setRegPassword(e.target.value)}
+            />
+          </div>
+          <p>
+            Already have account? <a href="/sign-in">LOGIN</a>
+          </p>
+          <div className="sign-up-button">
+            {!isPending && <button>REGISTER</button>}
+            {isPending && <button disabled>CREATING...</button>}
+            <button onClick={handleCancel} className="cancel-regist">
+              CANCEL
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };
