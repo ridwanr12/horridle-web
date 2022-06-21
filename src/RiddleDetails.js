@@ -14,7 +14,6 @@ const RiddleDetails = () => {
 
   const [data, setData] = useState(null);
   const [comments, setComments] = useState(null);
-  const [commentsid, setCommentsId] = useState(null);
   const [riddle, setRiddle] = useState(null);
 
   const [isPending, setIsPending] = useState(true);
@@ -133,19 +132,17 @@ const RiddleDetails = () => {
       });
   };
 
-  const handleComDelete = (e) => {
-    console.log(user);
-    // console.log(e);
-    console.log(e);
-    // console.log(comments[0].id_comment);
-    // axios
-    //   .post("http://localhost:3000/delete-comment/", {
-    //     id_comment: id_comment,
-    //   })
-    //   .then((res) => {
-    //     console.log(res);
-    //     history.push("/");
-    //   });
+  const handleComDelete = (id_com) => {
+    console.log(id_com);
+    axios
+      .post("http://localhost:3000/delete-comment/", {
+        id_comment: id_com,
+      })
+      .then((res) => {
+        console.log(res);
+        // history.push("/");
+        window.location.reload();
+      });
   };
 
   // console.log(data);
@@ -172,8 +169,6 @@ const RiddleDetails = () => {
                 </div>
                 {isAuthor && (
                   <div className="button-riddle">
-                    {/* <Link to="/edit" className="plus-create"> */}
-                    {/* <Link to="/edit"> */}
                     <Link to={`/edit/${data.id_riddle}`}>
                       <button>Edit</button>
                     </Link>
@@ -199,7 +194,6 @@ const RiddleDetails = () => {
                     <input
                       type="text"
                       placeholder="Tambahkan Jawaban..."
-                      // onKeyDown={handleEnter}
                       required
                       value={commentInput}
                       onChange={(e) => setCommentInput(e.target.value)}
@@ -234,13 +228,14 @@ const RiddleDetails = () => {
                     </div>
                     {role == 1 && (
                       <>
-                        <Link to={`/get-detail-comment/${comments.id_comment}`}>
-                          <h2>To Detail Comment</h2>
-                        </Link>
+                        <button
+                          onClick={() => handleComDelete(comments.id_comment)}
+                        >
+                          Delete Comment
+                        </button>
                       </>
                     )}
                   </div>
-                  {/* <br /> */}
                   <p className="comments-text">{comments.comment}</p>
                 </div>
               ))}

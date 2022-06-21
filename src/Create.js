@@ -40,39 +40,41 @@ const Create = () => {
   };
 
   return (
-    <div className="create">
-      <h2>CREATE NEW RIDDLE</h2>
-      <form onSubmit={handleSubmit}>
-        <label>Title: </label>
-        <input
-          type="text"
-          required
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
+    <div className="page-create">
+      <div className="create">
+        <h2>CREATE NEW RIDDLE</h2>
+        <form onSubmit={handleSubmit}>
+          <label>Title: </label>
+          <input
+            type="text"
+            required
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
 
-        <label>Riddle: </label>
-        <textarea
-          required
-          value={riddle_text}
-          onChange={(e) => setBody(e.target.value)}
-        />
+          <label>Riddle: </label>
+          <textarea
+            required
+            value={riddle_text}
+            onChange={(e) => setBody(e.target.value)}
+          />
 
-        <label>Answer: </label>
-        <input
-          type="text"
-          required
-          value={answer}
-          onChange={(e) => setAnswer(e.target.value)}
-        />
-        <div className="create-button">
-          {!isPending && <button>UPLOAD</button>}
-          {isPending && <button disabled>UPLOADING....</button>}
-          <button onClick={handleCancel} className="cancel-create">
-            CANCEL
-          </button>
-        </div>
-      </form>
+          <label>Answer: </label>
+          <input
+            type="text"
+            required
+            value={answer}
+            onChange={(e) => setAnswer(e.target.value)}
+          />
+          <div className="create-button">
+            {!isPending && <button>UPLOAD</button>}
+            {isPending && <button disabled>UPLOADING....</button>}
+            <button onClick={handleCancel} className="cancel-create">
+              CANCEL
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

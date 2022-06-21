@@ -17,8 +17,7 @@ body {
 .page-create,
 .page-edit,
 .page-not-found,
-.page-profile,
-.page-edit-profile {
+.page-profile{
   max-width: 1200px;
   margin: 30px auto;
   padding: 20px;
@@ -106,7 +105,7 @@ input:-webkit-autofill:active {
 
 /* sign-up & sign-in */
 .page-sign-in,
-.page-sign-up {
+.page-sign-up{
   /* max-height: 900px; */
   height: 750px;
   padding: 46px;
@@ -115,7 +114,6 @@ input:-webkit-autofill:active {
   margin: auto;
   background-color: #630000;
 }
-
 .sign-in,
 .sign-up {
   font-family: "IM Fell French Canon SC";
@@ -180,15 +178,13 @@ input:-webkit-autofill:active {
   background-color: #EEEBDD;
   color: #630000;
   padding: 10px 15px;
-  border: none;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 22px;
   margin: 8px;
 }
 
 .sign-in-button .cancel-login,
 .sign-up-button .cancel-regist {
-  background-color: #D8B6A4;
+  background-color: #ff6060;
 }
 
 .sign-in .fa,
@@ -438,13 +434,11 @@ input:-webkit-autofill:active {
 }
 
 .create-button .cancel-create {
-  color: #630000;
-  background-color: #D8B6A4;
+  background-color: #ff6060;
 }
 
 .edit-button .cancel-edit {
-  color: #630000;
-  background-color: #D8B6A4;
+  background-color: #ff6060;
 }
 
 .back-arrow {
@@ -568,7 +562,7 @@ select {
   width: 36px;
 }
 
-.comprofile button {
+.comprofile button{
   font-size: 14px;
   margin-left: auto;
   margin-right: 4px;
@@ -639,6 +633,11 @@ select {
   clear: both;
 }
 
+/* .page-detail{
+  max-width: 1200px;
+  
+} */
+
 /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
 @media screen and (max-width: 920px) {
   .column {
@@ -696,12 +695,10 @@ select {
   overflow: hidden;
 }
 
-.userProfile,
-.editUser {
+.userProfile {
   margin: 10px;
   border: 1px solid #630000;
   border-radius: 24px;
-  min-height: 500px;
 }
 
 .user-detail {
@@ -709,7 +706,6 @@ select {
 }
 
 .posts {
-  margin-top: 40px;
   display: flex;
   align-items: left;
 }
@@ -724,7 +720,6 @@ select {
 }
 
 .user-riddle {
-  min-height: 300px;
   display: flex;
   align-items: left;
   text-overflow: ellipsis;
@@ -764,48 +759,6 @@ select {
 
 .user-button button:hover {
   background-color: #ceceb3;
-}
-
-@media screen and (max-width: 500px) {
-
-  .sign-in,
-  .sign-up {
-    padding: 20px;
-  }
-
-  .page-sign-in,
-  .page-sign-up {
-    height: 750px;
-    padding: 4px;
-    margin-bottom: 8px;
-  }
-
-  .page-profile,
-  .page-edit-profile {
-    padding: 4px;
-    margin-top: 4px;
-    margin-bottom: 8px;
-  }
-
-  .userProfile {
-    max-height: 650px;
-  }
-
-  .user-detail {
-    margin: 20px;
-  }
-
-  .user-detail h1 {
-    font-size: 24px;
-  }
-
-  .editUser {
-    margin: 4px;
-  }
-
-  .form-edit-user {
-    margin-top: 4px;
-  }
 }
 
 .userRiddle {
@@ -864,23 +817,6 @@ select {
   overflow: hidden;
 }
 
-.no-riddle {
-  margin: auto;
-}
-
-.no-riddle .link {
-  text-align: center;
-  margin: 20px auto;
-}
-
-.link a {
-  text-decoration: none;
-  background-color: #630000;
-  color: #EEEBDD;
-  padding: 8px;
-  border-radius: 20px;
-}
-
 .no-user {
   text-align: center;
   background: #630000;
@@ -898,115 +834,4 @@ select {
   color: #7e80ff;
   text-decoration: none;
 
-}
-
-.form-edit-user {
-  margin: 32px 16px;
-}
-
-.form-edit-user h2 {
-  margin-bottom: 12px;
-}
-
-.form-edit-user label {
-  text-align: left;
-  display: block;
-}
-
-.form-edit-user input {
-  width: 90%;
-  background-color: #EEEBDD;
-  padding: 4px 10px;
-  margin: 10px 0;
-  border-radius: 20px;
-  box-sizing: border-box;
-  display: block;
-  font-size: 16px;
-  border: none;
-  border-bottom: 4px solid #cac3a4;
-}
-
-.form-edit-user input[type="file"] {
-  display: none;
-}
-
-.form-edit-user .label-file {
-  color: #EEEBDD;
-  height: 40px;
-  width: 80%;
-  background-color: #630000;
-  font-size: 16px;
-}
-
-.name-email,
-.pass {
-  width: 45%;
-  padding: 16px;
-}
-
-.form-edit-user:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-.edituser {
-  float: left;
-  padding: 10px;
-}
-
-@media screen and (max-width: 750px) {
-  .edituser {
-    float: none;
-  }
-
-  .name-email {
-    width: 90%;
-  }
-
-  .pass {
-    width: 90%;
-  }
-}
-
-.edit-profile-button {
-  margin-top: 16px;
-}
-
-.edit-profile-button button {
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  background-color: #630000;
-  color: #EEEBDD;
-  padding: 6px 18px;
-  border: none;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 12px;
-  margin: 4px;
-}
-
-.edit-profile-button .cancel-edit-profile {
-  /* margin-left: 8px;
-  margin-top: 4px; */
-  color: #630000;
-  background-color: #EEEBDD;
-}
-
-.dis-edit {
-  cursor: grab;
-}
-
-.user-pic label {
-  cursor: pointer;
-}
-
-.img-file .icon {
-  background-color: #00000040;
-  padding: 4px;
-  border-radius: 10px;
-  font-size: larger;
-  position: relative;
-  bottom: 30px;
-  right: 24px;
 }

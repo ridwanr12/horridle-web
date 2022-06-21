@@ -8,6 +8,7 @@ import NotFound from "./NotFound";
 import SignUp from "./SignUp";
 import SignIn from "./SignIn";
 import UserProfile from "./UserProfile";
+import EditProfile from "./EditProfile";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -35,6 +36,9 @@ function App() {
             </Route>
             <Route path="/user-profile">
               <UserProfile />
+            </Route>
+            <Route path="/edit-profile">
+              <EditProfile />
             </Route>
             <Route path="/get-detail-riddle/:id_riddle">
               <RiddleDetails />

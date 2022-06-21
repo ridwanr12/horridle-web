@@ -31,6 +31,9 @@ const UserProfile = () => {
           setError(null);
           setLenRiddles(res[1].data.values.length);
           console.log(res[1].data.values.length);
+          if (res[1].data.values == 0) {
+            console.log("gapunya");
+          }
         })
       );
     }, 250);
@@ -52,76 +55,86 @@ const UserProfile = () => {
   // console.log(userRiddle);
   // console.log(lenRiddles);
   return (
-    <div className="userProfile">
-      {isPending && (
-        <div className="loading">
-          <h2>Loading ....</h2>
-        </div>
-      )}
-      {error && <div>{error}</div>}
-      {userDetail ? (
-        <div className="user-detail">
-          <div className="user-pic">
-            <img src={userDetail.img_profile} className="comcircular_image" />
-            <div className="user-name">
-              <h1>{userDetail.name}</h1>
-              {lenRiddles ? (
-                <>
-                  <p>{lenRiddles} posts of riddle</p>
-                </>
-              ) : (
-                <>
-                  <p>0 posts of riddle</p>
-                </>
+    <div className="page-profile">
+      <div className="userProfile">
+        {isPending && (
+          <div className="loading">
+            <h2>Loading ....</h2>
+          </div>
+        )}
+        {error && <div>{error}</div>}
+        {userDetail ? (
+          <div className="user-detail">
+            <div className="user-pic">
+              <img src={userDetail.img_profile} className="comcircular_image" />
+              <div className="user-name">
+                <h1>{userDetail.name}</h1>
+                {lenRiddles ? (
+                  <>
+                    <p>
+                      <b>{lenRiddles}</b> posts of riddle
+                    </p>
+                  </>
+                ) : (
+                  <>
+                    <p>0 posts of riddle</p>
+                  </>
+                )}
+              </div>
+              <div className="user-button">
+                <button onClick={handleLogout}>Logout</button>
+                <button onClick={handleEdit}>Edit Profile</button>
+              </div>
+            </div>
+            <div className="posts">
+              <h2>Posts</h2>
+              <div className="links">
+                <Link to={"/create"}>+ Add</Link>
+              </div>
+            </div>
+            <div className="user-riddle">
+              {userRiddle?.map((values) => (
+                <div className="userRiddle" key={values.id_riddle}>
+                  <Link to={`/get-detail-riddle/${values.id_riddle}`}>
+                    <h2>{values.title}</h2>
+                    <br />
+                    <p className="user-riddle-body">{values.riddle_text}</p>
+                    <br />
+                    <div className="riddle-answer">
+                      <p>
+                        <span>Answer</span>
+                      </p>
+                      <p>{values.riddle_answer}</p>
+                    </div>
+                    <br />
+                    <p>
+                      <i>
+                        Written by <span>You</span>
+                      </i>
+                    </p>
+                    <br />
+                  </Link>
+                </div>
+              ))}
+              {userRiddle == 0 && (
+                <div className="no-riddle">
+                  <p>Belum membuat post apapun</p>
+                  <div className="link">
+                    <Link to={"/create"}>Create Riddle</Link>
+                  </div>
+                </div>
               )}
             </div>
-            <div className="user-button">
-              <button onClick={handleLogout}>Logout</button>
-              <button onClick={handleEdit}>Edit Profile</button>
-            </div>
           </div>
-          <br />
-          <br />
-          <div className="posts">
-            <h2>Posts</h2>
-            <div className="links">
-              <Link to={"/create"}>+ Add</Link>
-            </div>
+        ) : (
+          <div className="no-user">
+            <h1>Please Sign In</h1>
+            <Link to="/sign-in">Sign In</Link>
           </div>
-          <div className="user-riddle">
-            {userRiddle?.map((values) => (
-              <div className="userRiddle" key={values.id_riddle}>
-                <Link to={`/get-detail-riddle/${values.id_riddle}`}>
-                  <h2>{values.title}</h2>
-                  <br />
-                  <p className="user-riddle-body">{values.riddle_text}</p>
-                  <br />
-                  <div className="riddle-answer">
-                    <p>
-                      <span>Answer</span>
-                    </p>
-                    <p>{values.riddle_answer}</p>
-                  </div>
-                  <br />
-                  <p>
-                    <i>
-                      Written by <span>You</span>
-                    </i>
-                  </p>
-                  <br />
-                </Link>
-              </div>
-            ))}
-          </div>
-        </div>
-      ) : (
-        <div className="no-user">
-          <h1>Please Sign In</h1>
-          <Link to="/sign-in">Sign In</Link>
-        </div>
-      )}
-      {/* {!userDetail && (
+        )}
+        {/* {!userDetail && (
       )} */}
+      </div>
     </div>
   );
 };

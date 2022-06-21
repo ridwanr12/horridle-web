@@ -9,6 +9,7 @@ const SignUp = () => {
   const [regNama, setRegNama] = useState("");
   const [regEmail, setRegEmail] = useState("");
   const username = "username123";
+  const role = 2;
   const [regPasswordInput, setRegPassword] = useState("");
   const img_profile =
     "https://i.pinimg.com/736x/20/0d/72/200d72a18492cf3d7adac8a914ef3520.jpg";
@@ -31,12 +32,14 @@ const SignUp = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log("helo");
 
     setIsPending(true);
 
     axios
       .post(registerAPI, {
         img_profile: img_profile,
+        id_role: role,
         name: regNama,
         email: regEmail,
         username: username,
@@ -46,7 +49,7 @@ const SignUp = () => {
         console.log("res", res);
         setIsPending(false);
         localStorage.setItem("user id", res.data.my_user_id);
-        setMyId(localStorage.getItem("user id"));
+        localStorage.setItem("role", res.data.my_role);
         history.push("/");
         window.location.reload();
         yesToast();
