@@ -14,21 +14,11 @@ const SignUp = () => {
   const img_profile =
     "https://i.pinimg.com/736x/20/0d/72/200d72a18492cf3d7adac8a914ef3520.jpg";
   const [isPending, setIsPending] = useState(false);
-  const [my_id, setMyId] = useState("");
 
   const [eye, seteye] = useState(true);
   const [password, setpassword] = useState("password");
 
   const registerAPI = "http://localhost:3000/auth//api/v1/register";
-
-  const yesToast = () => {
-    toast.success("Register Successfull!", {
-      position: "top-right",
-      autoClose: 2000,
-      draggable: false,
-      theme: "colored",
-    });
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -52,9 +42,6 @@ const SignUp = () => {
         localStorage.setItem("role", res.data.my_role);
         history.push("/");
         window.location.reload();
-        yesToast();
-        yesToast();
-        yesToast();
       });
   };
 

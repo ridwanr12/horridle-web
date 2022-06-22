@@ -1,19 +1,15 @@
-import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 
 const Create = () => {
   const history = useHistory();
-  // const [id_user_author, setAuthor] = useState(8);
   const user = localStorage.getItem("user id");
 
   const [title, setTitle] = useState("");
   const [riddle_text, setBody] = useState("");
   const [answer, setAnswer] = useState("");
   const [isPending, setIsPending] = useState(false);
-
-  const detailAPI = "http://localhost:3000/get-detail-riddle/";
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -29,7 +25,6 @@ const Create = () => {
       })
       .then((res) => {
         console.log(res);
-        // console.log("new riddle added");
         handlePoin();
         setIsPending(false);
         history.push("/");

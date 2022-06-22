@@ -21,7 +21,6 @@ const EditRiddle = () => {
   const detailRiddleAPI = "http://localhost:3000/get-detail-riddle/";
   const editAPI = "http://localhost:3000/edit-riddle/";
 
-  // console.log(id_riddle);
   useEffect(() => {
     setTimeout(() => {
       axios
@@ -32,7 +31,6 @@ const EditRiddle = () => {
           // console.log(res);
           setData(res.data.values[0]);
           setIsPending(false);
-          // history.push("/");
           console.log(res.data.values[0]);
           if (user == res.data.values[0].id_user) {
             console.log("pemilik");
@@ -43,7 +41,7 @@ const EditRiddle = () => {
           }
         });
     }, 500);
-  },[]);
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -70,7 +68,11 @@ const EditRiddle = () => {
 
   return (
     <div className="page-edit">
-      {isPending && <div className="loading"><h2>Loading ....</h2></div>}
+      {isPending && (
+        <div className="loading">
+          <h2>Loading ....</h2>
+        </div>
+      )}
       {isOwner && (
         <div className="edit">
           <h2>EDIT RIDDLE</h2>
@@ -108,7 +110,9 @@ const EditRiddle = () => {
         </div>
       )}
       {!isOwner && (
-        <div className="not-owner">You're not the <b>owner</b></div>
+        <div className="not-owner">
+          You're not the <b>owner</b>
+        </div>
       )}
     </div>
   );

@@ -119,8 +119,6 @@ const UserProfile = () => {
             <Link to="/sign-in">Sign In</Link>
           </div>
         )}
-        {/* {!userDetail && (
-      )} */}
       </div>
     </div>
   );

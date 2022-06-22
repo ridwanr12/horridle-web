@@ -10,7 +10,6 @@ const RiddleDetails = () => {
   const history = useHistory();
   const { id_riddle } = useParams();
 
-  // const [user, setUser] = useState(8);
   const user = localStorage.getItem("user id");
   const role = localStorage.getItem("role");
 
@@ -65,8 +64,6 @@ const RiddleDetails = () => {
             } else if (user != res[0].data.values[0].id_user) {
               if (comments.length >= 1) {
                 for (let i = 0; i < comments.length; i++) {
-                  // console.log(i);
-                  // console.log(comments[i]);
                   if (comments[i].id_user == user) {
                     // console.log("pernah???");
                     setPernah(true);
@@ -142,7 +139,6 @@ const RiddleDetails = () => {
       })
       .then((res) => {
         console.log(res);
-        // history.push("/");
         window.location.reload();
       });
   };
@@ -169,8 +165,6 @@ const RiddleDetails = () => {
     });
   };
 
-  // console.log(data);
-  // console.log(allComments);
   return (
     <div className="page-detail">
       <button onClick={handleClick} className="back-arrow"></button>

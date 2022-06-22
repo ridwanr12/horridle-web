@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
@@ -181,8 +180,6 @@ const EditProfile = () => {
                       id="imgfile"
                       type="file"
                       accept="image/png, image/jpeg"
-                      // required
-                      // value={imgEdit}
                       onChange={(e) => handleFileSelect(e.target.files[0])}
                     />
                   </div>
@@ -192,14 +189,12 @@ const EditProfile = () => {
                     <input
                       type="password"
                       placeholder="Kosongkan = tidak diubah"
-                      // required
                       value={passwordEdit}
                       onChange={(e) => setPassEdit(e.target.value)}
                     />
                     <label>Confirm New Password</label>
                     <input
                       type="password"
-                      // required
                       value={confPassEdit}
                       onChange={(e) => setConfPassEdit(e.target.value)}
                       onBlur={(e) => handleConfirm(e)}
@@ -207,10 +202,7 @@ const EditProfile = () => {
                     <p style={{ color: "red" }}>{confPassMessage}</p>
                     <div className="edit-profile-button">
                       {confPassMessage ? (
-                        <>
-                          {!isPending && <button disabled>SAVE</button>}
-                          {/* <h2>Tidak bisa lanjut</h2> */}
-                        </>
+                        <>{!isPending && <button disabled>SAVE</button>}</>
                       ) : (
                         <>{!isPending && <button>SAVE</button>}</>
                       )}

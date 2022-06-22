@@ -3,7 +3,6 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 const Home = () => {
-  // const [user, setUser] = useState(8);
 
   const [data, setData] = useState(null);
 

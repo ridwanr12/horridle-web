@@ -3,7 +3,6 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-// axios.defaults.withCredentials=true;
 
 const SignIn = () => {
   const history = useHistory();
@@ -18,7 +17,6 @@ const SignIn = () => {
 
   const loginAPI = "http://localhost:3000/auth//api/v1/login";
 
-  // axios.defaults.withCredentials = true;
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -36,11 +34,9 @@ const SignIn = () => {
           setResponServer(res.data.message);
           localStorage.setItem("user id", res.data.my_user_id);
           localStorage.setItem("role", res.data.my_role);
-          // setLoginStatus(true);
           setIsPending(false);
           history.push("/");
           window.location.reload();
-          // yesToast();
         } else if (!res.data.success) {
           console.log(res.data.message);
           setResponServer(res.data.message);
