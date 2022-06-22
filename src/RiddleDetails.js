@@ -145,6 +145,18 @@ const RiddleDetails = () => {
       });
   };
 
+  const handlePoin = (id_user) => {
+    console.log(id_user);
+    axios
+      .post("http://localhost:3000/add-points/", {
+        id_user: id_user,
+        points: 10,
+      })
+      .then((res) => {
+        console.log(res);
+      });
+  };
+
   // console.log(data);
   // console.log(allComments);
   return (
@@ -226,6 +238,13 @@ const RiddleDetails = () => {
                       <h1>{comments.name}</h1>
                       <p className="date">dibuat {comments.date}</p>
                     </div>
+                    {isAuthor && (
+                      <>
+                        <button onClick={() => handlePoin(comments.id_user)}>
+                          Berikan poin
+                        </button>
+                      </>
+                    )}
                     {role == 1 && (
                       <>
                         <button

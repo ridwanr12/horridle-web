@@ -746,6 +746,11 @@ select {
   margin-right: 12px;
 }
 
+.user-pic .poin{
+  color: black;
+  font-weight: bold;
+}
+
 .user-button {
   margin-left: auto;
 }

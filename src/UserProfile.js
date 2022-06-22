@@ -24,7 +24,7 @@ const UserProfile = () => {
       const req2 = axios.post(userRiddlesAPI, { id_user_author: user });
       axios.all([req1, req2]).then(
         axios.spread((...res) => {
-          // console.log(res);
+          console.log(res);
           setUserDetail(res[0].data.values[0]);
           setUserRiddle(res[1].data.values);
           setIsPending(false);
@@ -69,17 +69,8 @@ const UserProfile = () => {
               <img src={userDetail.img_profile} className="comcircular_image" />
               <div className="user-name">
                 <h1>{userDetail.name}</h1>
-                {lenRiddles ? (
-                  <>
-                    <p>
-                      <b>{lenRiddles}</b> posts of riddle
-                    </p>
-                  </>
-                ) : (
-                  <>
-                    <p>0 posts of riddle</p>
-                  </>
-                )}
+                <p className="posted"><b>{lenRiddles}</b> posts of riddle</p>
+                <p className="poin">{userDetail.points} points</p>
               </div>
               <div className="user-button">
                 <button onClick={handleLogout}>Logout</button>
