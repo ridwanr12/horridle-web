@@ -11,33 +11,12 @@ const SignIn = () => {
   const [logPasswordInput, setLogPassword] = useState("");
 
   const [isPending, setIsPending] = useState(false);
-  // const [loginStatus, setLoginStatus] = useState(false);
   const [responServer, setResponServer] = useState("");
-  const [my_id, setMyId] = useState("");
 
   const [eye, seteye] = useState(true);
   const [password, setpassword] = useState("password");
 
   const loginAPI = "http://localhost:3000/auth//api/v1/login";
-
-  const yesToast = () => {
-    toast.success("Login Successfull!", {
-      position: "top-right",
-      autoClose: 2000,
-      draggable: false,
-      theme: "colored",
-      // pauseOnFocusLoss: false,
-    });
-  };
-  const noToast = () => {
-    toast.error("Login Failed!", {
-      position: "top-right",
-      autoClose: 3000,
-      draggable: false,
-      theme: "colored",
-      pauseOnFocusLoss: false,
-    });
-  };
 
   // axios.defaults.withCredentials = true;
   const handleSubmit = (e) => {
@@ -85,11 +64,20 @@ const SignIn = () => {
     }
   };
 
+  const noToast = () => {
+    toast.error("Login Failed!", {
+      position: "top-right",
+      autoClose: 3000,
+      draggable: false,
+      theme: "colored",
+      pauseOnFocusLoss: false,
+    });
+  };
+
   return (
     <div className="page-sign-in">
       <div className="sign-in">
         <h1>{responServer}</h1>
-        {my_id && <h1>My user ID: {my_id}</h1>}
         <h1>SIGN IN</h1>
         <form onSubmit={handleSubmit}>
           <input

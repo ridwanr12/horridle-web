@@ -122,6 +122,7 @@ const EditProfile = () => {
       position: "top-right",
       autoClose: 1000,
       draggable: false,
+      theme: "colored",
     });
   };
 

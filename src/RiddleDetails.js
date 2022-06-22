@@ -3,6 +3,8 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const RiddleDetails = () => {
   const history = useHistory();
@@ -154,7 +156,17 @@ const RiddleDetails = () => {
       })
       .then((res) => {
         console.log(res);
+        yesToast();
       });
+  };
+
+  const yesToast = () => {
+    toast.success("Sukses memberikan poin", {
+      position: "top-right",
+      autoClose: 2000,
+      draggable: false,
+      theme: "colored",
+    });
   };
 
   // console.log(data);

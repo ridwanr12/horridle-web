@@ -49,11 +49,7 @@ const UserProfile = () => {
   const handleEdit = () => {
     history.push("/edit-profile");
   };
-
-  // console.log(lenRiddleComments);
-  // console.log(userDetail);
-  // console.log(userRiddle);
-  // console.log(lenRiddles);
+  
   return (
     <div className="page-profile">
       <div className="userProfile">
