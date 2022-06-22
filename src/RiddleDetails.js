@@ -238,11 +238,17 @@ const RiddleDetails = () => {
                       <h1>{comments.name}</h1>
                       <p className="date">dibuat {comments.date}</p>
                     </div>
-                    {isAuthor && (
+                    {role == 2 && (
                       <>
-                        <button onClick={() => handlePoin(comments.id_user)}>
-                          Berikan poin
-                        </button>
+                        {isAuthor && (
+                          <>
+                            <button
+                              onClick={() => handlePoin(comments.id_user)}
+                            >
+                              Berikan poin
+                            </button>
+                          </>
+                        )}
                       </>
                     )}
                     {role == 1 && (

@@ -30,6 +30,7 @@ const Create = () => {
       .then((res) => {
         console.log(res);
         // console.log("new riddle added");
+        handlePoin();
         setIsPending(false);
         history.push("/");
       });
@@ -37,6 +38,18 @@ const Create = () => {
 
   const handleCancel = () => {
     history.push("/");
+  };
+
+  const handlePoin = () => {
+    console.log(user);
+    axios
+      .post("http://localhost:3000/add-points/", {
+        id_user: user,
+        points: 30,
+      })
+      .then((res) => {
+        console.log(res);
+      });
   };
 
   return (
